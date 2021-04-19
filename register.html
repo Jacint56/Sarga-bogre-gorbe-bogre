@@ -36,47 +36,47 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Fiók létrehozása!</h1>
                             </div>
-                            <form class="user" method="POST" action="/backend_php/registration.php">
+                            <form class="user" method="POST" action="./backend_php/registration.php" name="poszt">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="FirstName">Keresztnév:</label>
-                                        <input type="text" class="form-control form-control-user" id="FirstName"
+                                        <input type="text" class="form-control form-control-user" name="FirstName" id ="FirstName"
                                             placeholder="Keresztnév">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="LastName">Vezetéknév:</label>
-                                        <input type="text" class="form-control form-control-user" id="LastName"
+                                        <input type="text" class="form-control form-control-user" name="LastName" id="LastName"
                                             placeholder="Vezetéknév">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputEmail">E-mail:</label>
-                                    <input type="email" class="form-control form-control-user" id="InputEmail"
+                                    <input type="email" class="form-control form-control-user" name="InputEmail" id="InputEmail"
                                         placeholder="E-mail cím">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="InputPassword">Jelszó:</label>
-                                        <input type="password" class="form-control form-control-user"
+                                        <input type="password" class="form-control form-control-user" name="InputPassword"
                                             id="InputPassword" placeholder="Jelszó">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="RepeatPassword">Jelszó megerősítése:</label>
-                                        <input type="password" class="form-control form-control-user"
+                                        <input type="password" class="form-control form-control-user" name="RepeatPassword"
                                             id="RepeatPassword" placeholder="Jelszó megerősítése">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputAddress">Cím:</label>
-                                    <input type="text" class="form-control form-control-user" id="InputAddress"
+                                    <input type="text" class="form-control form-control-user" name="InputAddress" id="InputAddress"
                                         placeholder="Cím">
                                 </div>
                                 <div class="form-group">
                                     <label for="InputPhone">Telefon:</label>
-                                    <input type="text" class="form-control form-control-user" id="InputPhone"
+                                    <input type="text" class="form-control form-control-user" id="InputPhone" name="InputPhone"
                                         placeholder="Telefon szám">
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-user btn-block" id="RegisterSubmit" value="Regisztráció" >
+                                <input type="submit" class="btn btn-primary btn-user btn-block" name="button" id="RegisterSubmit" value="Regisztráció" >
                                 
                                 
                             </form>

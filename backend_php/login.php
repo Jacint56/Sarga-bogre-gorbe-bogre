@@ -4,32 +4,36 @@
 session_Start();
 
 //DB config & establish connection
-require_once('db_config.php');
+require_once "db_config.php";
 
 
 //user data
-if(isset($_POST['login'])){
+if(isset($_POST['button'])){
     $email = $_POST['InputEmail'];
-    $password = md5($_POST['InputPassword']);
-
+    $password = $_POST['InputPassword'];
     //check if the user exists with the given username & password
-    $select_user_and_pass = "SELECT Email, Pass from person where Email = :email1 and Pass = :pass1";
-    
+    $select_user_and_pass = "SELECT pass from person where email = :email1";
     $login_query = $conn -> prepare($select_user_and_pass);
-    $login_query = bindValue(':email1',$email);
-    $login_query = bindValue(':pass1',$password);
+    $login_query -> bindValue(':email1',$email);
     $login_query -> execute();
-    $results = $login_query -> fetchAll(PDO::FETCH_OBJ);
-    if($login_query -> rowCount() >0){
-        $_SESSION['InputEmail'] = $_POST['InputEmail'];
-        echo "<script> document.loaction = 'welcome.html'; </script>";
-
+    
+    if($login_query -> rowCount() ==1){
+        if($row = $login_query->fetch()){
+            $code = $row['pass'];
+            if(password_verify($password, $code)){
+                header('Location: ../index.html');
+            }
+            else{
+                goto a;
+            }
+        }
     }
     else{
-        $error = "Invalid details!";
+        a:
+        echo "szopas";
+      //  header('Location: ../index.html');
     }
-    
-    
 }
+
 
 ?>
