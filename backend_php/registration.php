@@ -2,7 +2,6 @@
 require_once "db_config.php";
 
 
-
 if(isset($_POST['button'])){
     $fname = $_POST['FirstName'];
     $lname = $_POST['LastName'];

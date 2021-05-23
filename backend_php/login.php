@@ -29,7 +29,7 @@ if(isset($_POST['button'])){
     }
     else{
         a:
-        echo "szopas";
+        echo "Sikertelen csatlakozás az adatbázishoz!";
       //  header('Location: ../index.html');
     }
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Color Utilities</title>
+    <title>Költség - kívánság megadása</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,8 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-     <!-- Custom icon-->
-     <link rel="icon" href="img/icon.ico" type="image/x-icon">
+    <!-- Custom icon-->
+    <link rel="icon" href="img/icon.ico" type="image/x-icon">
 
 </head>
 
@@ -81,14 +81,14 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Utilities</span>
                 </a>
-                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item active" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
                         <a class="collapse-item" href="utilities-border.html">Borders</a>
                         <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
+                        <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
                 </div>
             </li>
@@ -106,7 +106,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Oldalak</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
@@ -174,7 +174,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form> -->
+                    </form>-->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -184,9 +184,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
-                            </a>-->
+                            </a> -->
                             <!-- Dropdown - Messages -->
-                            <!--<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                           <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
@@ -200,8 +200,8 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                        </li>-->
+                            </div> 
+                        </li> -->
 
                         <!--Yet not important features  -->
                         <!-- Nav Item - Alerts -->
@@ -329,6 +329,7 @@
 
                      <div class="topbar-divider d-none d-sm-block"></div>
                      -->
+
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -369,95 +370,50 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Color Utilities</h1>
-                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
-                            href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
-                        below were created to extend this theme past the default utility classes built into Bootstrap's
-                        framework.</p>
+                    <h1 class="h3 mb-1 text-gray-800">Költségek és kívánságok hozzáadása</h1>
+                    <p class="mb-4">
+                        Itt adhatja meg a költségeket, és a kívánságokat a háztartáshoz.
+                    </p>
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- First Column -->
-                        <div class="col-lg-4">
+                        <div class="col-lg-6" >
 
-                            <!-- Custom Text Color Utilities -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Text Color Utilities</h6>
+                            <!-- Insert form -->
+                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                                 <div class="form-group">
+                                    <label for="inputExpenseCategory">Költség kategória megadása:</label>
+                                    <input type="text" class="form-control" id="inputExpenseCategory" name="inputExpenseCategory" placeholder="Költség kategória pl.: élelem">
+                                    
                                 </div>
-                                <div class="card-body">
-                                    <p class="text-gray-100 p-3 bg-dark m-0">.text-gray-100</p>
-                                    <p class="text-gray-200 p-3 bg-dark m-0">.text-gray-200</p>
-                                    <p class="text-gray-300 p-3 bg-dark m-0">.text-gray-300</p>
-                                    <p class="text-gray-400 p-3 bg-dark m-0">.text-gray-400</p>
-                                    <p class="text-gray-500 p-3 m-0">.text-gray-500</p>
-                                    <p class="text-gray-600 p-3 m-0">.text-gray-600</p>
-                                    <p class="text-gray-700 p-3 m-0">.text-gray-700</p>
-                                    <p class="text-gray-800 p-3 m-0">.text-gray-800</p>
-                                    <p class="text-gray-900 p-3 m-0">.text-gray-900</p>
+                                <div class="form-group">
+                                    <label for="inputExpensePrice">Költség ára:</label>
+                                    <input type="text" class="form-control" id="inputExpensePrice" name="inputExpensePrice" placeholder="Költség ára">
                                 </div>
-                            </div>
-
-                            <!-- Custom Font Size Utilities -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Font Size Utilities</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p class="text-xs">.text-xs</p>
-                                    <p class="text-lg mb-0">.text-lg</p>
-                                </div>
-                            </div>
-
+                                <button type="submit" name="insertExpense" id="insertExpense" class="btn btn-primary">Hozzáadás</button>
+                            </form>
                         </div>
+                        <div class="col-lg-6" >
 
-                        <!-- Second Column -->
-                        <div class="col-lg-4">
-
-                            <!-- Background Gradient Utilities -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Background Gradient Utilities
-                                    </h6>
+                            <!-- Insert form -->
+                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                                 <div class="form-group">
+                                    <label for="inputWishCategory">Kívánság kategória megadása:</label>
+                                    <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
+                                    
                                 </div>
-                                <div class="card-body">
-                                    <div class="px-3 py-5 bg-gradient-primary text-white">.bg-gradient-primary</div>
-                                    <div class="px-3 py-5 bg-gradient-secondary text-white">.bg-gradient-secondary</div>
-                                    <div class="px-3 py-5 bg-gradient-success text-white">.bg-gradient-success</div>
-                                    <div class="px-3 py-5 bg-gradient-info text-white">.bg-gradient-info</div>
-                                    <div class="px-3 py-5 bg-gradient-warning text-white">.bg-gradient-warning</div>
-                                    <div class="px-3 py-5 bg-gradient-danger text-white">.bg-gradient-danger</div>
-                                    <div class="px-3 py-5 bg-gradient-light text-white">.bg-gradient-light</div>
-                                    <div class="px-3 py-5 bg-gradient-dark text-white">.bg-gradient-dark</div>
+                                <div class="form-group">
+                                    <label for="inputWishPrice">Kívánság ára:</label>
+                                    <input type="text" class="form-control" id="inputWishPrice" name="inputWishPrice" placeholder="Kívánság ára">
                                 </div>
-                            </div>
-
+                                <div class="form-group">
+                                    <label for="inputWishName">Kívánság:</label>
+                                    <input type="text" class="form-control" id="inputWishName" name="inputWishName" placeholder="Kívánság">
+                                </div>
+                                <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
+                            </form>
                         </div>
-
-                        <!-- Third Column -->
-                        <div class="col-lg-4">
-
-                            <!-- Grayscale Utilities -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Grayscale Background Utilities
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="p-3 bg-gray-100">.bg-gray-100</div>
-                                    <div class="p-3 bg-gray-200">.bg-gray-200</div>
-                                    <div class="p-3 bg-gray-300">.bg-gray-300</div>
-                                    <div class="p-3 bg-gray-400">.bg-gray-400</div>
-                                    <div class="p-3 bg-gray-500 text-white">.bg-gray-500</div>
-                                    <div class="p-3 bg-gray-600 text-white">.bg-gray-600</div>
-                                    <div class="p-3 bg-gray-700 text-white">.bg-gray-700</div>
-                                    <div class="p-3 bg-gray-800 text-white">.bg-gray-800</div>
-                                    <div class="p-3 bg-gray-900 text-white">.bg-gray-900</div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
