@@ -1,6 +1,7 @@
 <?php
 require_once "db_config.php";
-
+echo phpversion();
+exit();
 
 if(isset($_POST['button'])){
     $fname = $_POST['FirstName'];
