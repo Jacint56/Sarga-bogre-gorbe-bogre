@@ -26,7 +26,34 @@ if(isset($_POST['button'])){
                 setcookie("lastname", $row["lname"], time() + (86400 * 30), "/");
                // session_set_cookie_params("member_login", $email, time()+3600,'/');
                 //session_set_cookie_params("member_password", $password, time()+3600,'/');
-                header('Location: ../index.php');
+/*
+                var_dump( $row['ID'] );
+                echo "<br>";
+                var_dump($_SERVER["REMOTE_ADDR"]);
+                echo "<br>";
+                var_dump($_SERVER["HTTP_USER_AGENT"]);
+*/
+                $insert_into_login = "INSERT INTO login(LoginID,IP, Browser,Time) VALUES ("
+                . strval($row['ID']) .
+                ","
+                .strval($_SERVER["REMOTE_ADDR"]) .
+                " ,"
+                . strval($_SERVER["HTTP_USER_AGENT"]) . 
+                " ,NOW())";
+
+                $insert_into_query = $conn-> prepare($insert_into_login);
+                $insert_into_query -> execute();
+                $lastInsertID = $conn -> lastInsertID();
+
+                if($lastInsertID > 0){
+                    $success_message = "Sikeres adatbevitel";
+                    //header('Location: ../login.html');
+                }
+                else{
+                    $success_message = "Nem sikerult az adatbevitel";
+                    
+                }
+                //header('Location: ../index.php');
             }
             else{
                 goto a;
@@ -35,7 +62,7 @@ if(isset($_POST['button'])){
     }
     else{
         a:
-        header("Location: ../login.html");
+        header("Location: ../login.php");
     }
 }
 
