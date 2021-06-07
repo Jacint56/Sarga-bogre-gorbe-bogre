@@ -84,8 +84,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.php">Colors</a>
+                           
+                    <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
                         <a class="collapse-item" href="utilities-border.php">Borders</a>
                         <a class="collapse-item" href="utilities-animation.php">Animations</a>
                         <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
