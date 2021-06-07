@@ -10833,12 +10833,14 @@ a:focus {
   background: url("https://image.freepik.com/free-vector/online-registration-isometric-landing-page_107791-6190.jpg");
   background-position: center;
   background-size: cover;
+
 }
 
 .bg-password-image {
   background: url("https://image.freepik.com/free-vector/forgot-password-concept-illustration_114360-4652.jpg");
   background-position: center;
   background-size: cover;
+
 }
 
 form.user .custom-checkbox.small label {
