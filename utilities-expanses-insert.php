@@ -395,6 +395,11 @@
                                     
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputExpenseDetails">Költség leírása:</label>
+                                    <input type="text" class="form-control" id="inputExpenseDetails" name="inputExpenseDetails" placeholder="Költség kategória pl.: banán">
+                                    
+                                </div>
+                                <div class="form-group">
                                     <label for="inputExpensePrice">Költség ára:</label>
                                     <input type="text" class="form-control" id="inputExpensePrice" name="inputExpensePrice" placeholder="Költség ára">
                                 </div>

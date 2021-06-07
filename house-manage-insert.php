@@ -388,9 +388,9 @@
                         <div class="col-lg-6" >
 
                             <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_house.php" id="inputHouseManageForm" name="inputHouseManageForm">
+                            <form method="POST" action="./backend_php/insert_housemanage.php" id="inputHouseManageForm" name="inputHouseManageForm">
                                  <div class="form-group">
-                                    <label for="inputExpenseCategory">Háztartás neve:</label>
+                                    <label for="inputHouseManageName">Háztartás neve:</label>
                                     <input type="text" class="form-control" id="inputHouseManageName" name="inputHouseManageName" placeholder="Háztartás neve pl.: Kis - család">
                                     
                                 </div>
