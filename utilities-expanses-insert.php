@@ -409,7 +409,7 @@
                         <div class="col-lg-6" >
 
                             <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
                                  <div class="form-group">
                                     <label for="inputWishCategory">Kívánság kategória megadása:</label>
                                     <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
