@@ -448,11 +448,8 @@
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
                                             session_Start();
-<<<<<<< HEAD
                                             require_once "backend_php/db_config.php";
-=======
                                             require_once "../backend_php/db_config.php";
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                                             $select_user_and_pass = "SELECT * from expense_category";
                                             $login_query = $conn -> prepare($select_user_and_pass);
                                             $login_query -> execute();
@@ -491,7 +488,33 @@
                         <br><br>
                             <!-- Insert form -->
                             <form method="POST" action="./backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
-                                 <div class="form-group">
+                                 
+                            <div class="form-group">
+                                    <label for="selectWishCategory">Költség kategória megadása:</label>
+                                    <select name="selectWishCategory" id="selectWishCategory">
+
+                                        <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
+                                        <?php
+                                            session_Start();
+                                            require_once "backend_php/db_config.php";
+                                            require_once "../backend_php/db_config.php";
+                                            $select_user_and_pass = "SELECT * from wish";
+                                            $login_query = $conn -> prepare($select_user_and_pass);
+                                            $login_query -> execute();
+                                            $data = $login_query->fetchAll();
+                                            foreach($data as $row ){
+
+                                                unset($id, $name);
+                                                $id = $row['ID'];
+                                                $name = $row['expenses_category_name']; 
+                                                echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
+                                            }
+                                            
+
+                                        ?>
+                                    </select>
+                                    </div>
+                                <div class="form-group">
                                     <label for="inputWishCategory">Kívánság kategória megadása:</label>
                                     <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
                                     
@@ -508,8 +531,7 @@
                             </form>
                         </div>
                     </div>
-<<<<<<< HEAD
-<<<<<<<< HEAD:Registered-user/utilities-expanses-insert.php
+
                     <br><br><br>
                     <div class="row">
                         <div class="col-lg-12">
@@ -517,17 +539,12 @@
 
                                 <button type="submit"  name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
                             </a>
-========
-=======
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
+
                     <div class="row">
                         <div class="col-lg-12">
                  
                             <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
-<<<<<<< HEAD
->>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee:utilities-expanses-insert.php
-=======
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
+
                         </div>
                     </div>
 
@@ -591,16 +608,21 @@
 
 </body>
 <?php
-/*
-if($_COOKIE["data"]!==null){
+
+/*if($_COOKIE["data"]!==null){
 
     unset($_COOKIE["data"]);
     setcookie("data", null, time() + (86400 * 30), "/");
     echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
     
 }*/
-=======
-    <script src="vendor/jquery/jquery.min.js"></script>
+if($_COOKIE["data"]!= ""){
+    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
+    unset($_COOKIE["data"]);
+    setcookie("data", '', time() + (86400 * 30), "/");
+}
+?>
+<script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -608,15 +630,4 @@ if($_COOKIE["data"]!==null){
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
-</body>
-<?php
-
-if($_COOKIE["data"]!= ""){
-    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
-    unset($_COOKIE["data"]);
-    setcookie("data", '', time() + (86400 * 30), "/");
-}
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
-?>
 </html>
