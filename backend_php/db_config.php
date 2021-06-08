@@ -1,9 +1,5 @@
 <?php
 
-define('DB_HOST','localhost');
-define('DB_USER','root');
-define('DB_NAME','cost');
-define('DB_PASS','');
 
 try
 {

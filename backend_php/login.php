@@ -1,17 +1,14 @@
 <?php
 
-//Session START
 session_Start();
 
-//DB config & establish connection
 require_once "db_config.php";
 
 
-//user data
 if(isset($_POST['button'])){
     $email = $_POST['InputEmail'];
     $password = $_POST['InputPassword'];
-    //check if the user exists with the given username & password
+    
     $select_user_and_pass = "SELECT * from person where email = :email1";
     $login_query = $conn -> prepare($select_user_and_pass);
     $login_query -> bindValue(':email1',$email);
@@ -42,12 +39,17 @@ if(isset($_POST['button'])){
                 $lastInsertID = $conn -> lastInsertID();
 
                 if($lastInsertID > 0){
+<<<<<<< HEAD
                     header('Location: ../Registered-user/index.php');
+=======
+                    header('Location: ../index.php');
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                 }
                 else{
                     echo "Nem sikerult az adatbevitel";
                     
                 }
+<<<<<<< HEAD
             	//echo $success_message;
             }
             else{
@@ -91,6 +93,12 @@ if(isset($_POST['button'])){
             }
             else{
                 echo "Something went wrong";
+=======
+
+            }
+            else{
+                echo "Something went wrong";
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
             }
         }
     }

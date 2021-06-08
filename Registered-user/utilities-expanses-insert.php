@@ -68,8 +68,13 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
+<<<<<<< HEAD
                         <a class="collapse-item" href="buttons.php">Buttons</a>
                         <a class="collapse-item" href="cards.php">Cards</a>
+=======
+                        <a class="collapse-item" href="../buttons.php">Buttons</a>
+                        <a class="collapse-item" href="../cards.php">Cards</a>
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     </div>
                 </div>
             </li>
@@ -125,14 +130,22 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
+<<<<<<< HEAD
                 <a class="nav-link" href="charts.php">
+=======
+                <a class="nav-link" href="../charts.php">
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
+<<<<<<< HEAD
                 <a class="nav-link" href="tables.php">
+=======
+                <a class="nav-link" href="../tables.php">
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
@@ -165,7 +178,41 @@
                     <!-- Topbar Search -->
 
                     <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+<<<<<<< HEAD
+<<<<<<<< HEAD:Registered-user/utilities-expanses-insert.php
                         <span>A háztartás neve:</span>
+========
+                        <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
+                            <?php 
+
+                        require_once "backend_php/db_config.php";
+                            $select_user_and_pass = "SELECT * from person where email = :email1";
+    
+                            $login_query = $conn -> prepare($select_user_and_pass);
+                            $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
+                            $login_query -> execute();
+
+
+                            if($login_query -> rowCount() ==1){
+                                if($row = $login_query->fetch()){ 
+                                    $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
+                                    
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                
+                                
+                                    if($login_query -> rowCount() ==1){
+                                        if($row = $login_query->fetch()){
+                                            echo  $row["Name"];
+                                        }
+                                    }
+                                }
+                            }
+    ?></span>
+>>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee:utilities-expanses-insert.php
+=======
+                        <span>A háztartás neve:</span>
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     </div>
 
                     <!--<form
@@ -401,7 +448,11 @@
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
                                             session_Start();
+<<<<<<< HEAD
                                             require_once "backend_php/db_config.php";
+=======
+                                            require_once "../backend_php/db_config.php";
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                                             $select_user_and_pass = "SELECT * from expense_category";
                                             $login_query = $conn -> prepare($select_user_and_pass);
                                             $login_query -> execute();
@@ -457,6 +508,8 @@
                             </form>
                         </div>
                     </div>
+<<<<<<< HEAD
+<<<<<<<< HEAD:Registered-user/utilities-expanses-insert.php
                     <br><br><br>
                     <div class="row">
                         <div class="col-lg-12">
@@ -464,6 +517,17 @@
 
                                 <button type="submit"  name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
                             </a>
+========
+=======
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
+                    <div class="row">
+                        <div class="col-lg-12">
+                 
+                            <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
+<<<<<<< HEAD
+>>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee:utilities-expanses-insert.php
+=======
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                         </div>
                     </div>
 
@@ -515,6 +579,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+<<<<<<< HEAD
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -525,5 +590,33 @@
     <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
+<?php
+/*
+if($_COOKIE["data"]!==null){
 
+    unset($_COOKIE["data"]);
+    setcookie("data", null, time() + (86400 * 30), "/");
+    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
+    
+}*/
+=======
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+<?php
+
+if($_COOKIE["data"]!= ""){
+    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
+    unset($_COOKIE["data"]);
+    setcookie("data", '', time() + (86400 * 30), "/");
+}
+>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
+?>
 </html>

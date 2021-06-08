@@ -2,30 +2,17 @@
 
   $con = mysqli_connect("localhost", "root", "", "cost");
   
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-  use PHPMailer\PHPMailer\SMTP;
-
-  require 'PHPMailer/src/Exception.php';
-  require 'PHPMailer/src/PHPMailer.php';
-  require 'PHPMailer/src/SMTP.php';
+  require 'PHPMailer/PHPMailerAutoload.php';
 
   $email_sent = false;
   $mail = new PHPMailer;
-  $mail->SMTPOptions = array(
-    'ssl' => array(
-    'verify_peer' => false,
-    'verify_peer_name' => false,
-    'allow_self_signed' => true
-    )
-    );
   $mail->IsSMTP(); // telling the class to use SMTP
   $mail->SMTPAuth = true; // enable SMTP authentication
   $mail->SMTPSecure = "tls"; // sets the prefix to the servier
   $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
   $mail->Port = 587; // set the SMTP port for the GMAIL server
-  $mail->Username = "housekiper2021@gmail.com"; // GMAIL username
-  $mail->Password = "abafurupolf"; // GMAIL password
+  $mail->Username = "jacint9876543210@gmail.com"; // GMAIL username
+  $mail->Password = "####Bolond900####"; // GMAIL password
 
 
 
@@ -52,20 +39,18 @@
 
 
       $message = "If you want to reset your password, then click on the link below.\n
-      Password reset:" .$link."\n
-      Your verification code: ".$uniq_id;
+Password reset:" .$link."\n
+Your verification code: ".$uniq_id;
 
-      $mail->AddAddress($email, "You");
-      $mail->SetFrom("jacint9876543210@gmail.com", 'Cost');
-      $mail->Subject = "Password reset";
-      $mail->Body = $message;
-      if($mail->Send()){
-          $email_sent = true;
-      }
+    $mail->AddAddress($email, "You");
+    $mail->SetFrom("jacint9876543210@gmail.com", 'Cost');
+    $mail->Subject = "Password reset";
+    $mail->Body = $message;
+    if($mail->Send()){
+        $email_sent = true;
     }
   }
-  var_dump($mail);
-  echo '<br><br>';
+  }
 if($email_sent){
     echo "Email sending was successful!";
 }
