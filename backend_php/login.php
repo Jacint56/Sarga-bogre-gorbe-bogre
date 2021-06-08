@@ -27,11 +27,6 @@ if(isset($_POST['button'])){
                	//session_set_cookie_params("member_login", $email, time()+3600,'/');
                 //session_set_cookie_params("member_password", $password, time()+3600,'/');
 
-                var_dump( $row['ID'] );
-                echo "<br>";
-                var_dump($_SERVER["REMOTE_ADDR"]);
-                echo "<br>";
-                var_dump($_SERVER["HTTP_USER_AGENT"]);
 
                	$insert_into_login = "INSERT INTO login(LoginID,IP, Browser,Time) VALUES ("
                 . strval($row['ID']) .
@@ -47,24 +42,20 @@ if(isset($_POST['button'])){
                 $lastInsertID = $conn -> lastInsertID();
 
                 if($lastInsertID > 0){
-                    $success_message = "Sikeres adatbevitel";
-                	//echo $success_message;
-                    header('Location: /index.php');
+                    header('Location: ../index.php');
                 }
                 else{
-                    $success_message = "Nem sikerult az adatbevitel";
+                    echo "Nem sikerult az adatbevitel";
                     
                 }
-                //header('Location: ../index.php');
             	//echo $success_message;
             }
             else{
-                goto a;
+                echo "Something went wrong";
             }
         }
     }
     else{
-        a:
         header("Location: login.html");
     }
 }
