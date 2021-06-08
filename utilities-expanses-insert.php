@@ -163,6 +163,11 @@
                     </button>
 
                     <!-- Topbar Search -->
+
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <span>A háztartás neve:</span>
+                    </div>
+
                     <!--<form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -184,9 +189,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
-                            </a> -->
+                            </a>-->
                             <!-- Dropdown - Messages -->
-                           <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            <!--<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
@@ -390,7 +395,26 @@
                             <!-- Insert form -->
                             <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
-                                    <label for="inputExpenseCategory">Költség kategória megadása:</label>
+                                    <label for="selectExpenseCategory">Költség kategória megadása:</label>
+                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
+
+                                        <option value="0" disabled> -- Válasszon kategóriát -- </option>
+                                        <?php
+                                            //require_once "/backend_php/db_config.php";
+                                            //$selectCategoryFromExpenses = "SELECT * from expense_category";
+                                            //$query = $conn -> prepare($selectCategoryFromExpenses);
+                                            //$query->execute();
+                                            //while ($row = $query->fetch()){
+                                            //    echo "<option value=".$row['ID'].">" . $row["expenses_category_name"] . "</option>";
+                                            //}
+                                            
+
+                                        ?>
+                                    </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                    <label for="inputExpenseCategory">Ha nem találja a keresett kategóriát, vigyen be újat:</label>
                                     <input type="text" class="form-control" id="inputExpenseCategory" name="inputExpenseCategory" placeholder="Költség kategória pl.: élelem">
                                     
                                 </div>
@@ -407,7 +431,7 @@
                             </form>
                         </div>
                         <div class="col-lg-6" >
-
+                        <br><br>
                             <!-- Insert form -->
                             <form method="POST" action="./backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
                                  <div class="form-group">
@@ -425,6 +449,12 @@
                                 </div>
                                 <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
                             </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                 
+                            <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
                         </div>
                     </div>
 
