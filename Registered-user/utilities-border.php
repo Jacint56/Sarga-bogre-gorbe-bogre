@@ -9,18 +9,18 @@
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Költség - kívánság megadása</title>
+    <title>Border Utilities</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom icon-->
-    <link rel="icon" href="img/icon.ico" type="image/x-icon">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+     <!-- Custom icon-->
+     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
 </head>
 
@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Kezdőlap</span></a>
             </li>
@@ -81,7 +81,7 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Lehetőségek</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                            
@@ -163,11 +163,6 @@
                     </button>
 
                     <!-- Topbar Search -->
-
-                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <span>A háztartás neve:</span>
-                    </div>
-
                     <!--<form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -179,7 +174,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>-->
+                    </form> -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -205,8 +200,8 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div> 
-                        </li> -->
+                            </div>
+                        </li>-->
 
                         <!--Yet not important features  -->
                         <!-- Nav Item - Alerts -->
@@ -382,89 +377,109 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Költségek és kívánságok hozzáadása</h1>
-                    <p class="mb-4">
-                        Itt adhatja meg a költségeket, és a kívánságokat a háztartáshoz.
-                    </p>
+                    <h1 class="h3 mb-1 text-gray-800">Border Utilities</h1>
+                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
+                            href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
+                        below were created to extend this theme past the default utility classes built into Bootstrap's
+                        framework.</p>
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <div class="col-lg-6" >
+                        <!-- Border Left Utilities -->
+                        <div class="col-lg-6">
 
-                            <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
-                                 <div class="form-group">
-                                    <label for="selectExpenseCategory">Költség kategória megadása:</label>
-                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
-
-                                        <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
-                                        <?php
-                                            session_Start();
-                                            require_once "backend_php/db_config.php";
-                                            $select_user_and_pass = "SELECT * from expense_category";
-                                            $login_query = $conn -> prepare($select_user_and_pass);
-                                            $login_query -> execute();
-                                            $data = $login_query->fetchAll();
-                                            foreach($data as $row ){
-
-                                                unset($id, $name);
-                                                $id = $row['ID'];
-                                                $name = $row['expenses_category_name']; 
-                                                echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
-                                            }
-                                            
-
-                                        ?>
-                                    </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                    <label for="inputExpenseCategory">Ha nem találja a keresett kategóriát, vigyen be újat:</label>
-                                    <input type="text" class="form-control" id="inputExpenseCategory" name="inputExpenseCategory" placeholder="Költség kategória pl.: élelem">
-                                    
+                            <div class="card mb-4 py-3 border-left-primary">
+                                <div class="card-body">
+                                    .border-left-primary
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputExpenseDetails">Költség leírása:</label>
-                                    <input type="text" class="form-control" id="inputExpenseDetails" name="inputExpenseDetails" placeholder="Költség leírása pl.: banán">
-                                    
+                            </div>
+
+                            <div class="card mb-4 py-3 border-left-secondary">
+                                <div class="card-body">
+                                    .border-left-secondary
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputExpensePrice">Költség ára:</label>
-                                    <input type="text" class="form-control" id="inputExpensePrice" name="inputExpensePrice" placeholder="Költség ára">
+                            </div>
+
+                            <div class="card mb-4 py-3 border-left-success">
+                                <div class="card-body">
+                                    .border-left-success
                                 </div>
-                                <button type="submit" name="insertExpense" id="insertExpense" class="btn btn-primary">Hozzáadás</button>
-                            </form>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-left-info">
+                                <div class="card-body">
+                                    .border-left-info
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-left-warning">
+                                <div class="card-body">
+                                    .border-left-warning
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-left-danger">
+                                <div class="card-body">
+                                    .border-left-danger
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-left-dark">
+                                <div class="card-body">
+                                    .border-left-dark
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-lg-6" >
-                        <br><br>
-                            <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
-                                 <div class="form-group">
-                                    <label for="inputWishCategory">Kívánság kategória megadása:</label>
-                                    <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputWishPrice">Kívánság ára:</label>
-                                    <input type="text" class="form-control" id="inputWishPrice" name="inputWishPrice" placeholder="Kívánság ára">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputWishName">Kívánság:</label>
-                                    <input type="text" class="form-control" id="inputWishName" name="inputWishName" placeholder="Kívánság">
-                                </div>
-                                <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
-                            </form>
-                        </div>
-                    </div>
-                    <br><br><br>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <a href="inveteMemberForm.php">
 
-                                <button type="submit"  name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
-                            </a>
+                        <!-- Border Bottom Utilities -->
+                        <div class="col-lg-6">
+
+                            <div class="card mb-4 py-3 border-bottom-primary">
+                                <div class="card-body">
+                                    .border-bottom-primary
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-bottom-secondary">
+                                <div class="card-body">
+                                    .border-bottom-secondary
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-bottom-success">
+                                <div class="card-body">
+                                    .border-bottom-success
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-bottom-info">
+                                <div class="card-body">
+                                    .border-bottom-info
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-bottom-warning">
+                                <div class="card-body">
+                                    .border-bottom-warning
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-bottom-danger">
+                                <div class="card-body">
+                                    .border-bottom-danger
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 py-3 border-bottom-dark">
+                                <div class="card-body">
+                                    .border-bottom-dark
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
 
                 </div>
@@ -515,14 +530,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 
