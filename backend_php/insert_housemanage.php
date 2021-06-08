@@ -8,8 +8,12 @@ session_Start();
 
 
 require_once "db_config.php";
+
+
+
 if(isset($_POST['insertHouseManage'])){
     $select_user_and_pass = "SELECT * from person where email = :email1";
+    $login_query = $conn -> prepare($select_user_and_pass);
     $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
     $login_query -> execute();
     $name = $_POST["inputHouseManageName"];
