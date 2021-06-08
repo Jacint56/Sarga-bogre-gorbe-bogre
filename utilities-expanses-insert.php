@@ -457,10 +457,13 @@
                             </form>
                         </div>
                     </div>
+                    <br><br><br>
                     <div class="row">
                         <div class="col-lg-12">
-                 
-                            <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
+                            <a href="inveteMemberForm.php">
+
+                                <button type="submit"  name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
+                            </a>
                         </div>
                     </div>
 
