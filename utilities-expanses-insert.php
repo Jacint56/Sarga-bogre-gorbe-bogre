@@ -398,15 +398,21 @@
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
                                     <select name="selectExpenseCategory" id="selectExpenseCategory">
 
-                                        <option value="0" disabled> -- Válasszon kategóriát -- </option>
+                                        <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
-                                            //require_once "/backend_php/db_config.php";
-                                            //$selectCategoryFromExpenses = "SELECT * from expense_category";
-                                            //$query = $conn -> prepare($selectCategoryFromExpenses);
-                                            //$query->execute();
-                                            //while ($row = $query->fetch()){
-                                            //    echo "<option value=".$row['ID'].">" . $row["expenses_category_name"] . "</option>";
-                                            //}
+                                            session_Start();
+                                            require_once "backend_php/db_config.php";
+                                            $select_user_and_pass = "SELECT * from expense_category";
+                                            $login_query = $conn -> prepare($select_user_and_pass);
+                                            $login_query -> execute();
+                                            $data = $login_query->fetchAll();
+                                            foreach($data as $row ){
+
+                                                unset($id, $name);
+                                                $id = $row['ID'];
+                                                $name = $row['expenses_category_name']; 
+                                                echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
+                                            }
                                             
 
                                         ?>
