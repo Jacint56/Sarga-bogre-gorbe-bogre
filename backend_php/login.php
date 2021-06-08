@@ -1,17 +1,14 @@
 <?php
 
-//Session START
 session_Start();
 
-//DB config & establish connection
 require_once "db_config.php";
 
 
-//user data
 if(isset($_POST['button'])){
     $email = $_POST['InputEmail'];
     $password = $_POST['InputPassword'];
-    //check if the user exists with the given username & password
+    
     $select_user_and_pass = "SELECT * from person where email = :email1";
     $login_query = $conn -> prepare($select_user_and_pass);
     $login_query -> bindValue(':email1',$email);
@@ -27,11 +24,6 @@ if(isset($_POST['button'])){
                	//session_set_cookie_params("member_login", $email, time()+3600,'/');
                 //session_set_cookie_params("member_password", $password, time()+3600,'/');
 
-                var_dump( $row['ID'] );
-                echo "<br>";
-                var_dump($_SERVER["REMOTE_ADDR"]);
-                echo "<br>";
-                var_dump($_SERVER["HTTP_USER_AGENT"]);
 
                	$insert_into_login = "INSERT INTO login(LoginID,IP, Browser,Time) VALUES ("
                 . strval($row['ID']) .
@@ -47,24 +39,20 @@ if(isset($_POST['button'])){
                 $lastInsertID = $conn -> lastInsertID();
 
                 if($lastInsertID > 0){
-                    $success_message = "Sikeres adatbevitel";
-                	//echo $success_message;
-                    header('Location: /index.php');
+                    header('Location: ../index.php');
                 }
                 else{
-                    $success_message = "Nem sikerult az adatbevitel";
+                    echo "Nem sikerult az adatbevitel";
                     
                 }
-                //header('Location: ../index.php');
-            	//echo $success_message;
+
             }
             else{
-                goto a;
+                echo "Something went wrong";
             }
         }
     }
     else{
-        a:
         header("Location: login.html");
     }
 }

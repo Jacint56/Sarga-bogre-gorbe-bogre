@@ -9,18 +9,18 @@
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Költség - kívánság megadása</title>
+    <title>Háztartás hozzáadása</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom icon-->
-    <link rel="icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
 </head>
 
@@ -84,8 +84,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                           
-                    <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
+                       
+                        <a class="collapse-item" href="house-manage-insert.php">Colors</a>
                         <a class="collapse-item" href="utilities-border.php">Borders</a>
                         <a class="collapse-item" href="utilities-animation.php">Animations</a>
                         <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
@@ -163,37 +163,6 @@
                     </button>
 
                     <!-- Topbar Search -->
-
-                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
-                            <?php 
-
-                        require_once "backend_php/db_config.php";
-                            $select_user_and_pass = "SELECT * from person where email = :email1";
-    
-                            $login_query = $conn -> prepare($select_user_and_pass);
-                            $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
-                            $login_query -> execute();
-
-
-                            if($login_query -> rowCount() ==1){
-                                if($row = $login_query->fetch()){ 
-                                    $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
-                                    
-                                    $login_query = $conn -> prepare($select_user_and_pass);
-                                    $login_query -> execute();
-                                
-                                
-                                    if($login_query -> rowCount() ==1){
-                                        if($row = $login_query->fetch()){
-                                            echo  $row["Name"];
-                                        }
-                                    }
-                                }
-                            }
-    ?></span>
-                    </div>
-
                     <!--<form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -215,9 +184,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
-                            </a>-->
+                            </a> -->
                             <!-- Dropdown - Messages -->
-                            <!--<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                           <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
@@ -408,9 +377,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Költségek és kívánságok hozzáadása</h1>
+                    <h1 class="h3 mb-1 text-gray-800">Háztartás hozzáadása</h1>
                     <p class="mb-4">
-                        Itt adhatja meg a költségeket, és a kívánságokat a háztartáshoz.
+                        Ezen az oldalon hozhat létre új háztartást.
                     </p>
 
                     <!-- Content Row -->
@@ -419,75 +388,20 @@
                         <div class="col-lg-6" >
 
                             <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                            <form method="POST" action="../backend_php/insert_housemanage.php" id="inputHouseManageForm" name="inputHouseManageForm">
                                  <div class="form-group">
-                                    <label for="selectExpenseCategory">Költség kategória megadása:</label>
-                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
-
-                                        <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
-                                        <?php
-                                            session_Start();
-                                            require_once "backend_php/db_config.php";
-                                            $select_user_and_pass = "SELECT * from expense_category";
-                                            $login_query = $conn -> prepare($select_user_and_pass);
-                                            $login_query -> execute();
-                                            $data = $login_query->fetchAll();
-                                            foreach($data as $row ){
-
-                                                unset($id, $name);
-                                                $id = $row['ID'];
-                                                $name = $row['expenses_category_name']; 
-                                                echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
-                                            }
-                                            
-
-                                        ?>
-                                    </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                    <label for="inputExpenseCategory">Ha nem találja a keresett kategóriát, vigyen be újat:</label>
-                                    <input type="text" class="form-control" id="inputExpenseCategory" name="inputExpenseCategory" placeholder="Költség kategória pl.: élelem">
+                                    <label for="inputHouseManageName">Háztartás neve:</label>
+                                    <input type="text" class="form-control" id="inputHouseManageName" name="inputHouseManageName" placeholder="Háztartás neve pl.: Kis - család">
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputExpenseDetails">Költség leírása:</label>
-                                    <input type="text" class="form-control" id="inputExpenseDetails" name="inputExpenseDetails" placeholder="Költség leírása pl.: banán">
-                                    
+                                    <label for="inputHouseManageDescription">Háztartás leírása:</label>
+                                    <input type="text" class="form-control" id="inputHouseManageDescription" name="inputHouseManageDescription" placeholder="Háztartás leírása pl.: Hány személy tagja a háztartásnak">
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputExpensePrice">Költség ára:</label>
-                                    <input type="text" class="form-control" id="inputExpensePrice" name="inputExpensePrice" placeholder="Költség ára">
-                                </div>
-                                <button type="submit" name="insertExpense" id="insertExpense" class="btn btn-primary">Hozzáadás</button>
+                                <button type="submit" name="insertHouseManage" id="insertHouseManage" class="btn btn-primary">Hozzáadás</button>
                             </form>
                         </div>
-                        <div class="col-lg-6" >
-                        <br><br>
-                            <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
-                                 <div class="form-group">
-                                    <label for="inputWishCategory">Kívánság kategória megadása:</label>
-                                    <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputWishPrice">Kívánság ára:</label>
-                                    <input type="text" class="form-control" id="inputWishPrice" name="inputWishPrice" placeholder="Kívánság ára">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputWishName">Kívánság:</label>
-                                    <input type="text" class="form-control" id="inputWishName" name="inputWishName" placeholder="Kívánság">
-                                </div>
-                                <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                 
-                            <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
-                        </div>
+                        
                     </div>
 
                 </div>
@@ -538,24 +452,15 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
-<?php
-/*
-if($_COOKIE["data"]!==null){
 
-    unset($_COOKIE["data"]);
-    setcookie("data", null, time() + (86400 * 30), "/");
-    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
-    
-}*/
-?>
 </html>
