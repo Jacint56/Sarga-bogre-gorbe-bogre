@@ -235,7 +235,7 @@ session_start();
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile-settings.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -283,7 +283,13 @@ session_start();
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        <form method="POST" action="profi-settings-data.php">
+                                                    <div class="form-group">
+                                                        <label for="changeFirstName">Keresztnév szerkesztése:</label>
+                                                        <input type="text" class="form-control" id="changeFirstName" name="changeFirstName">
+                                                    </div>
+                                                    <button type="submit" name="updateFirstName" id="updateFirstName" class="btn btn-primary">Módosítás</button>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>
