@@ -12,7 +12,7 @@ if(isset($_POST['submitInvite'])){
         $login_query -> execute();
         if($login_query -> rowCount() ==1){
             if($row = $login_query->fetch()){
-                
+                header('Location: emailes_meghivo.php?email='. $_SESSION["member_login"] . '&name='. $_SESSION["name"]. '&haztartas=' . $row["id_house_manage"]);
             }
         }
 

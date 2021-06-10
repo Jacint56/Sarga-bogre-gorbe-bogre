@@ -16,39 +16,25 @@
 
 
 
-  if(isset($_POST["sendemail"])) {
+  if(isset($_GET["email"])) {
     ini_set("SMTP","ssl://smtp.gmail.com");
     
     ini_set("smtp_port","587");
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    
-    $emailquery = "SELECT * FROM person WHERE email = '$email' ";
-    $uniq_id = uniqid();
-    $token_query = "UPDATE person SET pass = '$uniq_id' WHERE email = '$email' ";
 
-    $query = mysqli_query($con, $emailquery);
-    $query2 = mysqli_query($con, $token_query);
-
-    $emailcount = mysqli_num_rows($query);
-    $link = "http://localhost:8080/sarga-bogre-gorbe-bogre/backend_php/reset-pass.php";
-
-    if($emailcount) {
-
-      $userdata = mysqli_fetch_array($query);
+    $link = "http://localhost:8080/sarga-bogre-gorbe-bogre/loginescsatlakozas.php?housemanage=" . $_GET["id_house_manage"];
 
 
-
-      $message = "If you want to reset your password, then click on the link below.\n
-Password reset:" .$link."\n
-Your verification code: ".$uniq_id;
+      $message = $_GET["name"]." meghivott, hogy csatlakozz a haztartasahoz,
+       amennyiben szeretnel csatlakozni, kattints a linkre es jelentkezz be vagy pedig regisztralj ha nem vagy meg tag!.\n
+Csatlakozas:" .$link;
 
     $mail->AddAddress($email, "You");
     $mail->SetFrom("jacint9876543210@gmail.com", 'Cost');
-    $mail->Subject = "Password reset";
+    $mail->Subject = "Csatlakozas a haztartashoz!";
     $mail->Body = $message;
     if($mail->Send()){
         $email_sent = true;
-    }
+    
   }
   }
 if($email_sent){
