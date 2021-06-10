@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,13 +22,33 @@
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom graph style -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
      <!-- Custom icon-->
      <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
 </head>
 
 <body id="page-top">
-
+<?php
+/*
+require_once "../backend_php/db_config.php";
+$arr = array();
+            for($i=1;$i<13;$i++){
+                $select_query = "SELECT sum(price) AS 'osszegahonapra'
+                FROM expenses WHERE MONTH(date) = " . $i;
+                $select_expenses_query = $conn -> prepare($select_query);
+                $select_expenses_query -> execute();
+                $data = $select_expenses_query->fetchAll();
+                foreach($data as $row ){
+                    array_push($arr,$row["osszegahonapra"]);
+                }
+                
+            }
+            var_dump(($arr));
+                exit();
+*/
+            ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -112,9 +135,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Bejelentkezés:</h6>
-                        <a class="collapse-item" href="login.html">Belépés</a>
-                        <a class="collapse-item" href="register.html">Regisztráció</a>
-                        <a class="collapse-item" href="forgot-password.html">Elfelejtett jelszó</a>
+                        <a class="collapse-item" href="../login.html">Belépés</a>
+                        <a class="collapse-item" href="../register.html">Regisztráció</a>
+                        <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Egyéb oldalak:</h6>
                         <a class="collapse-item active" href="404.html">404 Page</a>
@@ -155,6 +178,7 @@
             <div id="content">
 
                 <!-- Topbar -->
+                
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
@@ -162,176 +186,45 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <!--<form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>-->
+                    
 
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" style="margin-top:30px;">
+                    
+                    <?php
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <!--<li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>-->
-                            <!-- Dropdown - Messages -->
-                            <!--<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>-->
+                    
+                        //session_Start();
+                        
+                        
+                        require_once "../backend_php/db_config.php";
+                        $select_invite = "SELECT id_invite from invite
+                        where invite.invited_person = 
+                        (SELECT ID from person where person.name = :name) and accepted = 0";
 
-                        <!--Yet not important features  -->
-                        <!-- Nav Item - Alerts -->
-                        <!--  <li class="nav-item dropdown no-arrow mx-1">
-                              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i class="fas fa-bell fa-fw"></i> -->
-                        <!-- Counter - Alerts -->
-                        <!-- <span class="badge badge-danger badge-counter">3+</span>
-                           </a> -->
-                        <!-- Dropdown - Alerts -->
-                        <!--
-                          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                              aria-labelledby="alertsDropdown">
-                              <h6 class="dropdown-header">
-                                  Alerts Center
-                              </h6>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="icon-circle bg-primary">
-                                          <i class="fas fa-file-alt text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 12, 2019</div>
-                                      <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                  </div>
-                              </a>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="icon-circle bg-success">
-                                          <i class="fas fa-donate text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 7, 2019</div>
-                                      $290.29 has been deposited into your account!
-                                  </div>
-                              </a>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="icon-circle bg-warning">
-                                          <i class="fas fa-exclamation-triangle text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 2, 2019</div>
-                                      Spending Alert: We've noticed unusually high spending for your account.
-                                  </div>
-                              </a>
-                              <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                          </div>
-                      </li>
-                      -->
+                        $select_invite_query = $conn -> prepare($select_invite);
+                        $select_invite_query->bindValue(':name',$_SESSION["name"]);
+                        $select_invite_query -> execute();
+                        if($select_invite_query->rowCount()>=1){
+                            echo '<li class="nav-item dropdown no-arrow mx-1">
+                          
+                            <a class="nav-link" href="../backend_php/meghivasok.php" id="yetInvited" onclick="yetClicked()" >
+                                <button class="btn btn-primary" type="button" >Meghívások elérhetőek</button>
+                            </a>';
+                            
+                        }
+                        else{
+                            echo " ";
+                        }
 
-                        <!-- Nav Item - Messages -->
-                        <!-- More not too important things -->
 
-                        <!-- <li class="nav-item dropdown no-arrow mx-1">
-                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <i class="fas fa-envelope fa-fw"></i>
-                                 -->
-                        <!-- Counter - Messages -->
-                        <!--
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a> -->
-                        <!-- Dropdown - Messages -->
-                        <!-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="messagesDropdown">
-                             <h6 class="dropdown-header">
-                                 Message Center
-                             </h6>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                         alt="">
-                                     <div class="status-indicator bg-success"></div>
-                                 </div>
-                                 <div class="font-weight-bold">
-                                     <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                         problem I've been having.</div>
-                                     <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                         alt="">
-                                     <div class="status-indicator"></div>
-                                 </div>
-                                 <div>
-                                     <div class="text-truncate">I have the photos that you ordered last month, how
-                                         would you like them sent to you?</div>
-                                     <div class="small text-gray-500">Jae Chun · 1d</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                         alt="">
-                                     <div class="status-indicator bg-warning"></div>
-                                 </div>
-                                 <div>
-                                     <div class="text-truncate">Last month's report looks great, I am very happy with
-                                         the progress so far, keep up the good work!</div>
-                                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                         alt="">
-                                     <div class="status-indicator bg-success"></div>
-                                 </div>
-                                 <div>
-                                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                         told me that people say this to all dogs, even if they aren't good...</div>
-                                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                         </div>
-                     </li>
+                        ?>
+                  
 
-                     <div class="topbar-divider d-none d-sm-block"></div>
-                     -->
+                        
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
+                        
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -340,12 +233,13 @@
                                     
                                     <?php
                                         //var_dump($_COOKIE);
-                                        echo $_COOKIE["name"] . " " . $_COOKIE["lastname"];
+                                        echo $_SESSION["name"] . " " . $_SESSION["lastname"];
+                                        //var_dump($_SESSION);
                                     ?>
 
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -367,7 +261,7 @@
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                            </div>
+                            </div> 
                         </li>
 
                     </ul>
@@ -390,29 +284,15 @@
 
                         <div class="col-xl-8 col-lg-7">
 
-                            <!-- Area Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                    <hr>
-                                    Styling for the area chart can be found in the
-                                    <code>/js/demo/chart-area-demo.js</code> file.
-                                </div>
-                            </div>
-
                             <!-- Bar Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                    <div class="chart-bar" >
+                                       
+                                            <canvas id="myBarChart"></canvas>
                                     </div>
                                     <hr>
                                     Styling for the bar chart can be found in the
@@ -422,24 +302,7 @@
 
                         </div>
 
-                        <!-- Donut Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <hr>
-                                    Styling for the donut chart can be found in the
-                                    <code>/js/demo/chart-pie-demo.js</code> file.
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                 </div>
@@ -483,11 +346,12 @@
                 <div class="modal-body">Válassza a "Kijelentkezés" lehetőséget, ha szeretné abbahagyni ezt a munkamenetet.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Mégse</button>
-                    <a class="btn btn-primary" href="login.html">Kijelentkezés</a>
+                    <a class="btn btn-primary" href="../index.php">Kijelentkezés</a>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -501,12 +365,126 @@
 
     <!-- Page level plugins -->
     <script src="../vendor/chart.js/Chart.min.js"></script>
+    <!-- Custom scripts-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
-    <script src="../js/demo/chart-bar-demo.js"></script>
 
+
+    <!-- ChartScript -->
+    <script type="text/javascript">
+        var ctx = document.getElementById('myBarChart');
+        var tomb = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep','Okt','Nov','Dec'];
+        <?php
+        $arr = array();
+        foreach($arr as $item): ?>
+            tomb.push(['<?php echo $item ?>']);
+            <?php endforeach; ?>
+
+            <?php
+
+            require_once "../backend_php/db_config.php";
+            $arr = [];
+            for($i=1;$i<13;$i++){
+                $select_query = "SELECT sum(price) AS 'osszegahonapra'
+                FROM expenses WHERE MONTH(date) = " . $i;
+                $select_expenses_query = $conn -> prepare($select_query);
+                $select_expenses_query -> execute();
+                $data = $select_expenses_query->fetchAll();
+                foreach($data as $row ){
+                    array_push($arr,$row["osszegahonapra"]);
+                }
+                
+            }
+            
+            ?>
+            
+      
+        
+        
+           
+
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: tomb,
+        
+        datasets: [{
+            label: 'Költség',
+            
+                    
+            data: [<?php 
+            foreach($arr as $item){
+                echo $item . ",";
+            }
+             ?>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        scales: {
+          x: [{
+            
+            gridLines: {
+              display: true,
+              drawBorder: true
+            },
+            ticks: {
+              maxTicksLimit: 6
+            },
+            maxBarThickness: 25,
+          }],
+          y: [{
+            ticks: {
+              min: 0,
+              max: 15000,
+              maxTicksLimit: 5,
+              padding: 10,
+              
+              
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: true,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        }
+    }
+});
+    </script>
+    
+    
 </body>
 
 </html>

@@ -13,15 +13,15 @@
     <title>Kezdőlap</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
      <!-- Custom icon-->
-     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+     <link rel="icon" href="img/icon.ico" type="image/x-icon">
 
 </head>
 
@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index-guest.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -46,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index-guest.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Kezdőlap</span></a>
             </li>
@@ -69,7 +69,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Rólunk</h6>
-                        <a class="collapse-item" href="about-us.php">Rólunk</a>
+                        <a class="collapse-item" href="aboutUs.html">Rólunk</a>
                         
                     </div>
 
@@ -166,19 +166,27 @@
                     <div class="row">
 
                         
-                        <div class="col-sm-12 col-lg-12">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
-                                    <p>Az oldalunk, egy háztartás költségeit lehet figyelemmel követni,
-                                     minden adat biztonságosan van tárolva, egy közeli szerveren.</p>
-                                     <p>Azért esett a választásunk az adott szerverre, mert így Ön jobb felhasználói élményben részesül, és nekünk Ön a legfontosabb.</P>
-                                     <p>A további lehetőségekért, kérem regisztráljon, és/vagy jelentkezzen be.</p>
-                                     <p>Köszönjük, hogy a <b>HouseKeeper</b> csapatát választotta.</p>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col ">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase ">
+                                                Pénzügyekkel foglalkozunk</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <img src="https://image.freepik.com/free-vector/happy-rich-banker-celebrating-income-growth_74855-5867.jpg" width="600" alt="money">
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                           
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!--<div class="col-sm-12 col-lg-6 ">
+                        <div class="col-sm-12 col-lg-6 ">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -196,51 +204,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>-->
-
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Ha szeretne velünk kapcsolatba lépni, hagyjon emailt.</h1>
-                                    </div>
-                                    <form class="user" method="POST" action="./backend_php/contact-form.php">
-                                        <div class="form-group">
-                                            <label for="inputName">Név:</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="inputName" name="inputName" placeholder="Írja be a teljes nevét!">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="InputEmail">E-mail:</label>
-                                            <input type="email" class="form-control form-control-user"
-                                                id="InputEmail" name="InputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="inputSubject">Tárgy:</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="inputSubject" name="inputSubject" 
-                                                placeholder="Az e-mail tárgya.">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="inputMessage">Üzenet:</label>
-                                            <textarea type="text" class="form-control"
-                                                id="inputMessage" name="inputMessage" placeholder="Nekünk szánt üzenet helye!" cols="30" rows="10"></textarea>
-                                        </div>
-                                        <input type="submit" class="btn btn-primary btn-user btn-block" id="submitEmail" name="submitEmail" value="Küldés">
-                                        
-                                        
-                                        
-                                    </form>
-                                </div>
-                            </div>
                         </div>
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -268,23 +233,42 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Logout Modal-->
+    <!--<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Már távozna?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Válassza a "Kijelentkezés" lehetőséget, ha szeretné abbahagyni ezt a munkamenetet.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Mégse</button>
+                    <a class="btn btn-primary" href="login.html">Kijelentkezés</a>
+                </div>
+            </div>
+        </div>
+    </div>-->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

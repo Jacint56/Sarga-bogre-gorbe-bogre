@@ -18,8 +18,12 @@ if(isset($_POST['insertExpense'])){
             VALUES (:id,:id_expenses,:details,NOW(),:price,:id_house_manage)";
             $query = $conn -> prepare($create_expenses_query);
             $query->bindValue('id', $row["ID"]);
-            if(empty($_POST["selectExpenseCategory"])){
-                $query->bindValue('id_expenses',$_POST["inputExpenseCategory"]);
+            if($_POST["selectExpenseCategory"] == NULL){
+                $createNewExpenseCategory = "INSERT into expense_category(expenses_category_name) values (:newCategory)";
+                $query2 = $conn -> prepare($createNewExpenseCategory);
+                $query2->bindValue(':newCategory',$_POST["inputExpenseCategory"]);
+                $query2 ->execute();
+                $query->bindValue(':id_expenses',$conn -> lastInsertID());
             }
             else{
                 $query->bindValue('id_expenses',$_POST["selectExpenseCategory"]);
@@ -30,25 +34,21 @@ if(isset($_POST['insertExpense'])){
             $query->bindValue('id_house_manage', $row["id_house_manage"]);
 
             if($query->execute()){
-                setcookie("data", "Sikeres adatbevitel!", time() + (86400 * 30), "/");
-                header('Location: ../utilities-expanses-insert.php');
+                header('Location: ../Registered-user/utilities-expanses-insert.php?insert=true');
             }
             else{
-                setcookie("data", "Sikertelen adatbevitel!", time() + (86400 * 30), "/");
-                header('Location: ../utilities-expanses-insert.php');
+                header('Location: ../Registered-user/utilities-expanses-insert.php?insert=false');
             }
         }   
         else{
-            setcookie("data", "Something went wrong!", time() + (86400 * 30), "/");
-            header('Location: ../utilities-expanses-insert.php');
+            header('Location: ../Registered-user/utilities-expanses-insert.php?insert=false');
         }
     }
     else{
-        setcookie("data", "Something went wrong!", time() + (86400 * 30), "/");
-        header('Location: ../Registered-user/utilities-expanses-insert.php');
+        header('Location: ../Registered-user/utilities-expanses-insert.php?insert=false');
     }
 }
-else if(isset($_POST['insertWish'])){/*
+else if(isset($_POST['insertWish'])){
     $select_user_and_pass = "SELECT * from person where email = :email1";
     
     $login_query = $conn -> prepare($select_user_and_pass);
@@ -58,18 +58,35 @@ else if(isset($_POST['insertWish'])){/*
     if($login_query -> rowCount() ==1){
         if($row = $login_query->fetch()){
 
-            $create_expenses_query = "INSERT INTO wish(id_person, wish_name, wish_category, Price, date)
-            VALUES (:id,:name,:category,:price,NOW())";
+            $create_expenses_query = "INSERT INTO wish(id_person, wish_name, wish_category, Price, date, id_house_manage)
+            VALUES (:id,:name,:category,:price,NOW(),:houseid)";
             $query = $conn -> prepare($create_expenses_query);
             $query->bindValue('id', $row["ID"]);
-            $query->bindValue('id_expenses', $_POST["selectExpenseCategory"]);
-            $query->bindValue('details', $_POST["inputExpenseDetails"]);
-            $query->bindValue('price', $_POST["inputExpensePrice"]);
-            $query->bindValue('id_house_manage', $row["id_house_manage"]);
+            
+            if($_POST["selectWishCategory"] == NULL){
+                $query->bindValue('category',$_POST["inputWishCategory"]);
+            }
+            else{
+                $query->bindValue('category',$_POST["selectWishCategory"]);
+            }
+            $query->bindValue('name', $_POST["inputWishName"]);
+            $query->bindValue('price', $_POST["inputWishPrice"]);
+            $query->bindValue('houseid', $row["id_house_manage"]);
 
+            if($query->execute()){
+                header('Location: ../Registered-user/utilities-expanses-insert.php?insert=true');
+            }
+            else{
+                header('Location: ../Registered-user/utilities-expanses-insert.php?insert=false');
+            }
         }   
-    
-    }*/
+        else{
+            header('Location: ../Registered-user/utilities-expanses-insert.php?insert=false');
+        }   
+    }
+    else{
+        header('Location: ../Registered-user/utilities-expanses-insert.php?insert=false');
+    }
 }
 
 

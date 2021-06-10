@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Animation Utilities</title>
+    <title>Személyek / családok módosítása - törlése</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,21 +36,21 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">HouseKeeper</div>
+                <div class="sidebar-brand-text mx-3">HouseKeeper </div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Kezdőlap</span></a>
+                    <span>Személyek / családok módosítása - törlése</span></a>
             </li>
 
             <!-- Divider -->
@@ -75,20 +78,21 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Lehetőségek</span>
                 </a>
-                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                           
-                    <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
+                        
+                   <!--<a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
                         <a class="collapse-item" href="utilities-border.php">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.php">Animations</a>
-                        <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
+                        <a class="collapse-item" href="utilities-animation.php">Animations</a>-->
+                        <a href="main-panel.php"class="collapse-item">Személyek - módosítása</a>
+                        <a class="collapse-item " href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
                 </div>
             </li>
@@ -118,7 +122,7 @@
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Egyéb oldalak:</h6>
                         <a class="collapse-item active" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <a class="collapse-item" href="blank.php">Blank Page</a>
                     </div>
                 </div>
             </li>
@@ -144,6 +148,8 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
+            
 
         </ul>
         <!-- End of Sidebar -->
@@ -183,19 +189,20 @@
 
                     
                         //session_Start();
+                        
+                        
                         require_once "../backend_php/db_config.php";
                         $select_invite = "SELECT id_invite from invite
                         where invite.invited_person = 
-                        (SELECT ID from person where person.name = '" . $_SESSION["name"] . "')";
+                        (SELECT ID from person where person.name = :name) and accepted = 0";
 
                         $select_invite_query = $conn -> prepare($select_invite);
+                        $select_invite_query->bindValue(':name',$_SESSION["name"]);
                         $select_invite_query -> execute();
-                        if($select_invite_query->rowCount()===1){
-                            
+                        if($select_invite_query->rowCount()>=1){
                             echo '<li class="nav-item dropdown no-arrow mx-1">
                           
-                            <a class="nav-link dropdown-toggle" href="../backend_php/meghivasok.php" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="../backend_php/meghivasok.php" id="yetInvited" onclick="yetClicked()" >
                                 <button class="btn btn-primary" type="button" >Meghívások elérhetőek</button>
                             </a>';
                             
@@ -206,7 +213,12 @@
 
 
                         ?>
+                  
 
+                        
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -215,12 +227,12 @@
                                     
                                     <?php
                                         //var_dump($_COOKIE);
-                                        echo $_COOKIE["name"] . " " . $_COOKIE["lastname"];
+                                        echo $_SESSION["name"] . " " . $_SESSION["lastname"];
                                     ?>
 
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -254,107 +266,145 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Animation Utilities</h1>
-                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
-                            href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
-                        below were created to extend this theme past the default utility classes built into Bootstrap's
-                        framework.</p>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Személyek / családok módosítása - törlése</h1>
+                        
+                    </div>
 
                     <!-- Content Row -->
                     <div class="row">
+                                <div class="col-lg-12">       
+                                    <form method="POST" action="#">     
+                                        <input type="text" id="keres" name="keres" placeholder="">    
+                                        <select class="btn btn-secondary" name="selectSomething">                   
+                                            <option value="0">Személy</option>            
+                                            <option value="1">Család</option>          
+                                        </select>                     
+                                        <input type="submit" name="btn" class="btn btn-primary" value="Keresés">        
+                                    </form>
+                                    <div class="col-lg-12">
+                                    <table class='table' id='dataTable' width='100%'>
+                                <?php
+                                require_once "../backend_php/db_config.php";
+                                if(isset($_POST['btn'])){
+                                    if($_POST['selectSomething'] == 0){
+                                        echo"
+                                        
+                                            <thead class='thead-dark'>      
+                                            <tr>  
+                                                <th>ID</th>  
+                                                <th>Keresztnév</th>
+                                                <th>Vezetéknév</th>  
+                                                <th>Telefonszám</th>
+                                                <th>Cím</th>  
+                                                <th>E-mail</th>
+                                                <th>Hitelesítés</th>  
+                                                <th>Rang</th>
+                                                <th>Háztartás ID</th>
+                                            </tr>
+                                        </thead>
+                                        ";
+                                    $select_user_and_pass = "SELECT * from person";
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                    $data = $login_query->fetchAll();
+                                    foreach($data as $row ){
+                                        //unset($id, $name);
+                                        $id = $row['ID'];
+                                        $name = $row['name']; 
+                                        $lname = $row['lname'];
+                                        $phone = $row['phone'];
+                                        $address = $row['address'];
+                                        $email = $row['email'];
+                                        $verification = $row['verification'];
+                                        $rank = $row['rank'];
+                                        $idHouseManage = $row['id_house_manage'];
 
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-6">
+                                        //$name = $row['expenses_category_name'];
+                                        //echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
+                                        echo "<tr>
+                                        <td>".$id ."</td>".
+                                        "<td>".$name ."</td>".
+                                        "<td>".$lname ."</td>".
+                                        "<td>".$phone ."</td>".
+                                        "<td>".$address ."</td>".
+                                        "<td>".$email ."</td>".
+                                        "<td>".$verification ."</td>".
+                                        "<td>".$rank ."</td>".
+                                        "<td>".$idHouseManage ."</td>".
+                                        "<td>".
+                                        "<form action='#' method='POST' >".
+                                        "<button class='btn btn-primary' name='deleteUser' type='button' >Felhasználó törlése</button>".
+                                        " </form>
+                                        </td>
+                                        </tr>"
+                                        ;
+                                    }
 
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Grow In Animation Utilty</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <code>.animated--grow-in</code>
-                                    </div>
-                                    <div class="small mb-1">Navbar Dropdown Example:</div>
-                                    <nav class="navbar navbar-expand navbar-light bg-light mb-4">
-                                        <a class="navbar-brand" href="#">Navbar</a>
-                                        <ul class="navbar-nav ml-auto">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Dropdown
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right animated--grow-in"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <p class="mb-0 small">Note: This utility animates the CSS transform property,
-                                        meaning it will override any existing transforms on an element being animated!
-                                        In this theme, the grow in animation is only being used on dropdowns within the
-                                        navbar.</p>
-                                </div>
-                            </div>
+                                }
 
-                        </div>
+                                   
+                                }
+                                if(isset($_POST['btn'])){
+                                    if($_POST['selectSomething'] == 1){
+                                        echo"
+                                        
+                                            <thead class='thead-dark'>      
+                                            <tr>  
+                                                <th>ID</th>  
+                                                <th>Háztartás neve</th>
+                                                <th>Háztartás leírása</th>  
+                                                <th>Létrehozás dátuma</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        ";
+                                    $select_user_and_pass = "SELECT * from  house_manage";
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                    $data = $login_query->fetchAll();
+                                    foreach($data as $row ){
+                                        //unset($id, $name);
+                                        $id = $row['ID'];
+                                        $name = $row['Name']; 
+                                        $description = $row['Description'];
+                                        $date = $row['Date'];
+                                        
 
-                        <!-- Fade In Utility -->
-                        <div class="col-lg-6">
+                                        //$name = $row['expenses_category_name'];
+                                        //echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
+                                        echo "<tr>
+                                        <td>".$id ."</td>".
+                                        "<td>".$name ."</td>".
+                                        "<td>".$description ."</td>".
+                                        "<td>".$date ."</td>".
+                                        "<td>".
+                                        "<form action='#' method='POST' >".
+                                        "<button class='btn btn-primary' name='deleteUser' type='button' >Háztartás törlése</button>".
+                                        " </form>
+                                        </td>
+                                        </tr>"
+                                        ;
+                                    }
 
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Fade In Animation Utilty</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <code>.animated--fade-in</code>
-                                    </div>
-                                    <div class="small mb-1">Navbar Dropdown Example:</div>
-                                    <nav class="navbar navbar-expand navbar-light bg-light mb-4">
-                                        <a class="navbar-brand" href="#">Navbar</a>
-                                        <ul class="navbar-nav ml-auto">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Dropdown
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right animated--fade-in"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <div class="small mb-1">Dropdown Button Example:</div>
-                                    <div class="dropdown mb-4">
-                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Dropdown
-                                        </button>
-                                        <div class="dropdown-menu animated--fade-in"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning
-                                        it will override any existing opacity on an element being animated!</p>
-                                </div>
-                            </div>
+                                }
 
-                        </div>
+                                   
+                                }
 
+                                ?>
+                                
+                            </table>
+                                    
+                                
+                    </div>
+                        
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        
+
+                        
                     </div>
 
                 </div>
@@ -398,11 +448,12 @@
                 <div class="modal-body">Válassza a "Kijelentkezés" lehetőséget, ha szeretné abbahagyni ezt a munkamenetet.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Mégse</button>
-                    <a class="btn btn-primary" href="login.html">Kijelentkezés</a>
+                    <a class="btn btn-primary" href="../index.php">Kijelentkezés</a>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -413,6 +464,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/chart-area-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 

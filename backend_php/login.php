@@ -1,6 +1,6 @@
 <?php
 
-session_Start();
+session_start();
 
 require_once "db_config.php";
 
@@ -16,11 +16,19 @@ if(isset($_POST['button'])){
     
     if($login_query -> rowCount() ==1){
         if($row = $login_query->fetch()){
+            
             if(password_verify($password, $row['pass'])){
-                setcookie("member_login", $email, time() + (86400 * 30), "/");
-                setcookie("member_password", $password, time() + (86400 * 30), "/");
-                setcookie("name", $row["name"], time() + (86400 * 30), "/");
-                setcookie("lastname", $row["lname"], time() + (86400 * 30), "/");
+                
+                //setcookie("member_login", $email, time() + (86400), "/");
+                $_SESSION["member_login"] = $email;
+                //setcookie("member_password", $password, time() + (86400 ), "/");
+                $_SESSION["member_password"] = $password;
+                //setcookie("name", $row["name"], time() + (86400 ), "/");
+                $_SESSION["name"] = $row["name"];
+                //setcookie("lastname", $row["lname"], time() + (86400 ), "/");
+                $_SESSION["lastname"] = $row["lname"];
+
+
                	//session_set_cookie_params("member_login", $email, time()+3600,'/');
                 //session_set_cookie_params("member_password", $password, time()+3600,'/');
 
@@ -32,79 +40,33 @@ if(isset($_POST['button'])){
                 "' ,'"
                 . strval($_SERVER["HTTP_USER_AGENT"]) . 
                 "' ,NOW())";
-            	echo "<br><br>";
-				var_dump($insert_into_login);
+            	
                 $insert_into_query = $conn-> prepare($insert_into_login);
                 $insert_into_query -> execute();
                 $lastInsertID = $conn -> lastInsertID();
 
                 if($lastInsertID > 0){
-<<<<<<< HEAD
-                    header('Location: ../Registered-user/index.php');
-=======
-                    header('Location: ../index.php');
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
+                    if($row['rank'] == 1 || $row['rank'] == 3){
+                        header('Location: ../Admin/index.php');
+                    }
+                    else {
+                        goto a;
+                    }
                 }
                 else{
                     echo "Nem sikerult az adatbevitel";
                     
                 }
-<<<<<<< HEAD
+
             	//echo $success_message;
             }
             else{
-                echo "Something went wrong";
+                a:
+                header('Location: ../Registered-user/index.php');
             }
         }
     }
-    //Innentol majd nezd at, hogy helyes-e
-    if($login_query -> rowCount()==1){
-        if($row = $login_query->fetch()){
-            if(password_verify($password, $row['pass']) && $row['rank'] == 1){
-                setcookie("member_login", $email, time() + (86400 * 30), "/");
-                setcookie("member_password", $password, time() + (86400 * 30), "/");
-                setcookie("name", $row["name"], time() + (86400 * 30), "/");
-                setcookie("lastname", $row["lname"], time() + (86400 * 30), "/");
-               	//session_set_cookie_params("member_login", $email, time()+3600,'/');
-                //session_set_cookie_params("member_password", $password, time()+3600,'/');
-
-
-               	$insert_into_login = "INSERT INTO login(LoginID,IP, Browser,Time) VALUES ("
-                . strval($row['ID']) .
-                ",'"
-                . strval($_SERVER["REMOTE_ADDR"]) .
-                "' ,'"
-                . strval($_SERVER["HTTP_USER_AGENT"]) . 
-                "' ,NOW())";
-            	echo "<br><br>";
-				var_dump($insert_into_login);
-                $insert_into_query = $conn-> prepare($insert_into_login);
-                $insert_into_query -> execute();
-                $lastInsertID = $conn -> lastInsertID();
-
-                if($lastInsertID > 0){
-                    header('Location: ../Admin/index.php');
-                }
-                else{
-                    echo "Nem sikerult az adatbevitel";
-                    
-                }
-            	//echo $success_message;
-            }
-            else{
-                echo "Something went wrong";
-=======
-
-            }
-            else{
-                echo "Something went wrong";
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
-            }
-        }
-    }
-    else{
-        header("Location: login.html");
-    }
+    
 }
 
 

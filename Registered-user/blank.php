@@ -111,9 +111,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Bejelentkezés:</h6>
-                        <a class="collapse-item" href="login.html">Belépés</a>
-                        <a class="collapse-item" href="register.html">Regisztráció</a>
-                        <a class="collapse-item" href="forgot-password.html">Elfelejtett jelszó</a>
+                        <a class="collapse-item" href="../login.html">Belépés</a>
+                        <a class="collapse-item" href="../register.html">Regisztráció</a>
+                        <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Egyéb oldalak:</h6>
                         <a class="collapse-item active" href="404.html">404 Page</a>
@@ -336,7 +336,7 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 
                                     <?php
-                                        //var_dump($_COOKIE);
+                                        
                                         echo $_COOKIE["name"] . " " . $_COOKIE["lastname"];
                                     ?>
 

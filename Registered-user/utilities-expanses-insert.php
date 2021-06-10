@@ -1,7 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
+    <script type="text/javascript">
+        window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
+	</script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,8 +30,34 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="checkCookie()">
+<?php
+    if(isset($_GET["insert"])){
+        if($_GET["insert"]){
+            echo '<script type="text/javascript">
+            alert("Sikeres bevitel")
+                </script>';
+        } 
+        else{
+            echo '<script type="text/javascript">
+            alert("Sikertelen bevitel")
+                </script>';
+        }
+    }
+    else if(isset($_GET["tagmeghivva"])){
+        if($_GET["tagmeghivva"]){
+            echo '<script type="text/javascript">
+            alert("Meghivo sikeresen elkuldve!")
+                </script>';
+        } 
+        else{
+            echo '<script type="text/javascript">
+            alert("A meghivot nem sikerult elkuldeni!")
+                </script>';
+        }
+    }
 
+?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -45,7 +77,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Kezdőlap</span></a>
             </li>
@@ -68,13 +100,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-<<<<<<< HEAD
                         <a class="collapse-item" href="buttons.php">Buttons</a>
                         <a class="collapse-item" href="cards.php">Cards</a>
-=======
-                        <a class="collapse-item" href="../buttons.php">Buttons</a>
-                        <a class="collapse-item" href="../cards.php">Cards</a>
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     </div>
                 </div>
             </li>
@@ -86,7 +113,7 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Lehetőségek</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" href="#" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                            
@@ -113,39 +140,31 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Oldalak</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                <div id="collapsePages" class="collapse" href="#" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Bejelentkezés:</h6>
-                        <a class="collapse-item" href="login.html">Belépés</a>
-                        <a class="collapse-item" href="register.html">Regisztráció</a>
-                        <a class="collapse-item" href="forgot-password.html">Elfelejtett jelszó</a>
+                        <a class="collapse-item" href="../login.html">Belépés</a>
+                        <a class="collapse-item" href="../register.html">Regisztráció</a>
+                        <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Egyéb oldalak:</h6>
                         <a class="collapse-item active" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <a class="collapse-item" href="blank.php">Blank Page</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-<<<<<<< HEAD
                 <a class="nav-link" href="charts.php">
-=======
-                <a class="nav-link" href="../charts.php">
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-<<<<<<< HEAD
                 <a class="nav-link" href="tables.php">
-=======
-                <a class="nav-link" href="../tables.php">
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
@@ -178,18 +197,14 @@
                     <!-- Topbar Search -->
 
                     <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-<<<<<<< HEAD
-<<<<<<<< HEAD:Registered-user/utilities-expanses-insert.php
-                        <span>A háztartás neve:</span>
-========
-                        <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
+                    <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
                             <?php 
 
-                        require_once "backend_php/db_config.php";
+                        require_once "../backend_php/db_config.php";
                             $select_user_and_pass = "SELECT * from person where email = :email1";
     
                             $login_query = $conn -> prepare($select_user_and_pass);
-                            $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
+                            $login_query -> bindValue(':email1',$_SESSION["member_login"]);
                             $login_query -> execute();
 
 
@@ -208,11 +223,7 @@
                                     }
                                 }
                             }
-    ?></span>
->>>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee:utilities-expanses-insert.php
-=======
-                        <span>A háztartás neve:</span>
->>>>>>> f1f8324c5ca378ed3b8d592bf0431efaf8463bee
+                        ?></span>
                     </div>
 
                     <!--<form
@@ -229,159 +240,39 @@
                     </form>-->
 
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" style="margin-top:30px;">
+                    
+                    <?php
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <!--<li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>-->
-                            <!-- Dropdown - Messages -->
-                            <!--<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> 
-                        </li> -->
+                    
+                        //session_Start();
+                        
+                        
+                        require_once "../backend_php/db_config.php";
+                        $select_invite = "SELECT id_invite from invite
+                        where invite.invited_person = 
+                        (SELECT ID from person where person.name = :name) and accepted = 0";
 
-                        <!--Yet not important features  -->
-                        <!-- Nav Item - Alerts -->
-                        <!--  <li class="nav-item dropdown no-arrow mx-1">
-                              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i class="fas fa-bell fa-fw"></i> -->
-                        <!-- Counter - Alerts -->
-                        <!-- <span class="badge badge-danger badge-counter">3+</span>
-                           </a> -->
-                        <!-- Dropdown - Alerts -->
-                        <!--
-                          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                              aria-labelledby="alertsDropdown">
-                              <h6 class="dropdown-header">
-                                  Alerts Center
-                              </h6>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="icon-circle bg-primary">
-                                          <i class="fas fa-file-alt text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 12, 2019</div>
-                                      <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                  </div>
-                              </a>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="icon-circle bg-success">
-                                          <i class="fas fa-donate text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 7, 2019</div>
-                                      $290.29 has been deposited into your account!
-                                  </div>
-                              </a>
-                              <a class="dropdown-item d-flex align-items-center" href="#">
-                                  <div class="mr-3">
-                                      <div class="icon-circle bg-warning">
-                                          <i class="fas fa-exclamation-triangle text-white"></i>
-                                      </div>
-                                  </div>
-                                  <div>
-                                      <div class="small text-gray-500">December 2, 2019</div>
-                                      Spending Alert: We've noticed unusually high spending for your account.
-                                  </div>
-                              </a>
-                              <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                          </div>
-                      </li>
-                      -->
+                        $select_invite_query = $conn -> prepare($select_invite);
+                        $select_invite_query->bindValue(':name',$_SESSION["name"]);
+                        $select_invite_query -> execute();
+                        if($select_invite_query->rowCount()>=1){
+                            echo '<li class="nav-item dropdown no-arrow mx-1">
+                          
+                            <a class="nav-link" href="../backend_php/meghivasok.php" id="yetInvited" onclick="yetClicked()" >
+                                <button class="btn btn-primary" type="button" >Meghívások elérhetőek</button>
+                            </a>';
+                            
+                        }
+                        else{
+                            echo " ";
+                        }
 
-                        <!-- Nav Item - Messages -->
-                        <!-- More not too important things -->
 
-                        <!-- <li class="nav-item dropdown no-arrow mx-1">
-                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <i class="fas fa-envelope fa-fw"></i>
-                                 -->
-                        <!-- Counter - Messages -->
-                        <!--
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a> -->
-                        <!-- Dropdown - Messages -->
-                        <!-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="messagesDropdown">
-                             <h6 class="dropdown-header">
-                                 Message Center
-                             </h6>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                         alt="">
-                                     <div class="status-indicator bg-success"></div>
-                                 </div>
-                                 <div class="font-weight-bold">
-                                     <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                         problem I've been having.</div>
-                                     <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                         alt="">
-                                     <div class="status-indicator"></div>
-                                 </div>
-                                 <div>
-                                     <div class="text-truncate">I have the photos that you ordered last month, how
-                                         would you like them sent to you?</div>
-                                     <div class="small text-gray-500">Jae Chun · 1d</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                         alt="">
-                                     <div class="status-indicator bg-warning"></div>
-                                 </div>
-                                 <div>
-                                     <div class="text-truncate">Last month's report looks great, I am very happy with
-                                         the progress so far, keep up the good work!</div>
-                                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item d-flex align-items-center" href="#">
-                                 <div class="dropdown-list-image mr-3">
-                                     <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                         alt="">
-                                     <div class="status-indicator bg-success"></div>
-                                 </div>
-                                 <div>
-                                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                         told me that people say this to all dogs, even if they aren't good...</div>
-                                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                 </div>
-                             </a>
-                             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                         </div>
-                     </li>
-
-                     <div class="topbar-divider d-none d-sm-block"></div>
-                     -->
-
+                        ?>
+                  
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -390,12 +281,12 @@
                                     
                                     <?php
                                         //var_dump($_COOKIE);
-                                        echo $_COOKIE["name"] . " " . $_COOKIE["lastname"];
+                                        echo $_SESSION["name"] . " " . $_SESSION["lastname"];
                                     ?>
 
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -440,7 +331,7 @@
                         <div class="col-lg-6" >
 
                             <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
                                     <select name="selectExpenseCategory" id="selectExpenseCategory">
@@ -448,7 +339,6 @@
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
                                             session_Start();
-                                            require_once "backend_php/db_config.php";
                                             require_once "../backend_php/db_config.php";
                                             $select_user_and_pass = "SELECT * from expense_category";
                                             $login_query = $conn -> prepare($select_user_and_pass);
@@ -485,25 +375,20 @@
                             </form>
                         </div>
                         <div class="col-lg-6" >
-                        <br><br>
                             <!-- Insert form -->
-                            <form method="POST" action="./backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
-                                 
+                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
                             <div class="form-group">
                                     <label for="selectWishCategory">Költség kategória megadása:</label>
                                     <select name="selectWishCategory" id="selectWishCategory">
 
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
-                                            session_Start();
-                                            require_once "backend_php/db_config.php";
                                             require_once "../backend_php/db_config.php";
-                                            $select_user_and_pass = "SELECT * from wish";
+                                            $select_user_and_pass = "SELECT * from expense_category";
                                             $login_query = $conn -> prepare($select_user_and_pass);
                                             $login_query -> execute();
                                             $data = $login_query->fetchAll();
                                             foreach($data as $row ){
-
                                                 unset($id, $name);
                                                 $id = $row['ID'];
                                                 $name = $row['expenses_category_name']; 
@@ -513,42 +398,178 @@
 
                                         ?>
                                     </select>
-                                    </div>
-                                <div class="form-group">
+                                    </div>     
+                            <div class="form-group">
                                     <label for="inputWishCategory">Kívánság kategória megadása:</label>
                                     <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputWishPrice">Kívánság ára:</label>
-                                    <input type="text" class="form-control" id="inputWishPrice" name="inputWishPrice" placeholder="Kívánság ára">
-                                </div>
-                                <div class="form-group">
                                     <label for="inputWishName">Kívánság:</label>
                                     <input type="text" class="form-control" id="inputWishName" name="inputWishName" placeholder="Kívánság">
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputWishPrice">Kívánság ára:</label>
+                                    <input type="text" class="form-control" id="inputWishPrice" name="inputWishPrice" placeholder="Kívánság ára">
+                                </div>
+                                
                                 <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
                             </form>
                         </div>
                     </div>
-
-                    <br><br><br>
-                    <div class="row">
+                    <div class="row" style="padding-top:10px;">
                         <div class="col-lg-12">
-                            <a href="inveteMemberForm.php">
-
-                                <button type="submit"  name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
-                            </a>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                 
+                        <form method="POST" id="inviteMemberToHouseManage" name="inviteMemberToHouseManage">         
                             <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
+                        </form>
+                        </div>
+                    </div>
+                    <?php
+                        if(isset($_POST['inviteMemberToHouseManage'])){
+                            echo "
+                                <div class='row'>
+                                <div class='col-lg-12'>
+                                <br>
+                                <form method='POST' action='../backend_php/tagmeghivas.php'>
+                                
+                                <div class='form-group'>
+                                <label for='invitedPersonName'>Meghivni kivant szemely neve:</label>
+                                
+                                <input type='text' class='form-control' name='invitedPersonName' id='invitedPersonName' placeholder='Meghivni kivant szemely neve:'>
+                                </div>
+                                <button type='submit' name='submitInvite' id='submitInvite' class='btn btn-primary'>Meghivas</button>
+                                </form>
+                                </div>
+                                </div>
+                                ";
+                        }
+                    ?>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>SzemelyID</th>
+                                    <th>Kivansg neve</th>
+                                    <th>Kivansg kategoria</th>
+                                    <th>Kivansg ara</th>
+                                    
 
+                                    
+                                
+                                    <?php
+                                require_once "../backend_php/db_config.php";
+                                $leader = false;
+                                $select_user_and_pass = "SELECT * from person where email = :email1";
+                                
+                                $login_query = $conn -> prepare($select_user_and_pass);
+                                $login_query -> bindValue(':email1',$_SESSION["member_login"]);
+                                $login_query -> execute();
+                                $housemanageID = "";
+                                $person = "";
+                                if($login_query -> rowCount() ==1){
+                                    if($row = $login_query->fetch()){
+                                        if($row["rank"] == 2 or $row["rank"] == 3){
+                                            $leader = true;
+                                            $housemanageID =$row["id_house_manage"];
+                                            $person = $row["ID"];
+                                        }
+                                    }
+                                }
+                                    require_once "../backend_php/db_config.php";
+                                    $select_user_and_pass = "SELECT wish.ID, person.name, wish_name, expenses_category_name ,Price,date, wish.id_house_manage from wish
+   JOIN expense_category ON 
+   wish.wish_category = expense_category.ID
+   JOIN person ON
+   wish.id_person = person.ID
+    where wish.id_house_manage=".  $housemanageID ;
+                                    $asd = $conn -> prepare($select_user_and_pass);
+                                    $asd -> execute();
+                                    $data = $asd->fetchAll();
+                                    $wishName = "";
+                                    foreach($data as $row ){
+                                        //unset($id, $name);
+                                        $id = $row['ID'];
+                                        $idPerson = $row['name']; 
+                                        $wishName = $row['wish_name'];
+                                        $wishCategory = $row['expenses_category_name'];
+                                        $wishPrice = $row['Price'];
+                                        $date = $row['date'];
+                                        //echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
+                                        echo "<tr>
+                                        <td name=\"" . $id ." \">".$id ."</td>".
+                                        "<td>".$idPerson ."</td>".
+                                        "<td>".$wishName ."</td>".
+                                        "<td>".$wishCategory ."</td>".
+                                        "<td>".$wishPrice ."</td>".
+                                        "<td>".$date ."</td>";
+
+                                        if($leader){
+                                        echo '<td>
+                                        
+                                        <form method="POST" action="#" id="insertWishForm" name="insertWishForm">         
+                                        <button type="submit" name="elfogad" id="inviteMemberToHouseManage" class="btn btn-primary" value="'. $id .'">Elfogad</button>
+                                          
+                                        <button type="submit" name="elvet" id="inviteMemberToHouseManage" class="btn btn-primary" value="'. $id .'">Elvet</button>
+                                        </form>
+                                        
+                                        </td>';
+                                    }
+
+                                    echo "</tr>
+
+                                    ";
+                                    }
+                                    
+                                    
+
+                                ?>
+                                </table>
+                                
+                                <?php
+                                    if(isset($_POST['elfogad'])){
+
+                                        $select_from_wishes = "SELECT * FROM wish where ID = ". $_POST['elfogad'];
+                                        $wish_query = $conn -> prepare($select_from_wishes);
+                                        $wish_query -> execute();
+                                        if($row = $wish_query->fetch()){
+                                            $insert_into_exp = "INSERT INTO expenses(id_person,id_expenses_category, details, date, Price, id_house_manage)
+                                            VALUES (:id_person," . $row["wish_category"] .",:details, NOW(), :price, :idHouse)";
+                                            
+                                            $expense_query = $conn -> prepare($insert_into_exp);
+                                            $expense_query -> bindValue(':id_person',$person);
+                                           // $expense_query -> bindValue(':expenses_category',$row["wish_category"]);
+                                            $expense_query -> bindValue(':details',$row["wish_name"]);
+                                            $expense_query -> bindValue(':price',$row["Price"]);
+                                            $expense_query -> bindValue(':idHouse',$row["id_house_manage"]);
+                                            
+                                            if($expense_query -> execute()){
+                                                $delete_from_wishes = "DELETE FROM wish WHERE ID=".$_POST['elfogad'];
+                                                $wish_query = $conn -> prepare($delete_from_wishes);
+                                                if($wish_query -> execute()){
+                                                    echo "<script>location.reload();</script>";
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                    if(isset($_POST['elvet'])){
+                                        $delete_from_wishes = "DELETE FROM wish WHERE ID=".$_POST['elvet'];
+                                        $wish_query = $conn -> prepare($delete_from_wishes);
+                                        if($wish_query -> execute()){
+                                            echo "<script>location.reload();</script>";
+                                        }
+                                    }
+                                
+                                ?>
                         </div>
                     </div>
 
+
+
                 </div>
+                
                 <!-- /.container-fluid -->
 
             </div>
@@ -589,14 +610,13 @@
                 <div class="modal-body">Válassza a "Kijelentkezés" lehetőséget, ha szeretné abbahagyni ezt a munkamenetet.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Mégse</button>
-                    <a class="btn btn-primary" href="login.html">Kijelentkezés</a>
+                    <a class="btn btn-primary" href="../index.php">Kijelentkezés</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-<<<<<<< HEAD
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -607,27 +627,5 @@
     <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
-<?php
 
-/*if($_COOKIE["data"]!==null){
-
-    unset($_COOKIE["data"]);
-    setcookie("data", null, time() + (86400 * 30), "/");
-    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
-    
-}*/
-if($_COOKIE["data"]!= ""){
-    echo '<script> alert("' . $_COOKIE["data"] .'")</script>';
-    unset($_COOKIE["data"]);
-    setcookie("data", '', time() + (86400 * 30), "/");
-}
-?>
-<script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
 </html>

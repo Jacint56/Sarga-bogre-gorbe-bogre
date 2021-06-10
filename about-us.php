@@ -13,15 +13,15 @@
     <title>Kezdőlap</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
      <!-- Custom icon-->
-     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+     <link rel="icon" href="img/icon.ico" type="image/x-icon">
 
 </head>
 
@@ -178,26 +178,6 @@
                             </div>
                         </div>
 
-                        <!--<div class="col-sm-12 col-lg-6 ">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col ">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase ">
-                                                Költségek havi kimutatása</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <img src="https://image.freepik.com/free-vector/clock-increasing-chart-workflow-productivity-increase-work-performance-optimization-efficiency-indicator-rising-effectiveness-metrics-vector-isolated-concept-metaphor-illustration_335657-2718.jpg" width="600" alt="chart of expense">
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                           
-                                        <i class="fas fa-chart-pie"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
-
                 </div>
                 <br><br>
                 <div class="row">
@@ -270,21 +250,21 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

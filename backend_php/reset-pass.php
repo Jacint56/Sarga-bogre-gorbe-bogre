@@ -20,27 +20,38 @@ if(isset($_POST['reset-password'])){
         }
     }
 }
-
-
 ?>
 
 <!DOCTYPE html>
  <html lang="en">
    <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
+    <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-     <script src="https://use.fontawesome.com/1d8204edd4.js"></script>
+    
+   <!-- Custom fonts for this template-->
+   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-     <link rel="stylesheet" href="css/resetpassword.css">
-
+    <!-- Custom styles for this template-->
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+     <!-- Custom icon-->
+     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+     
+     <!--<link rel="stylesheet" href="css/resetpassword.css">-->
+    
      <title>Reset Password</title>
 
    </head>
 
-   <body>
-
+   <body class="bg-gray-400">
+<div id="content-wrapper" class="d-flex flex-column ">
+    <div id="content">
      <div class="d-flex justify-content-center align-items-center login-container">
 
          <form class="login-form text-center col-3 col-sm-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
@@ -56,19 +67,37 @@ if(isset($_POST['reset-password'])){
              <div class="form-group">
                  <label>CONFIRM PASSWORD:</label>
                  <input type="password" name="confirm-password" required class="form-control rounded-pill form-control-lg" placeholder="Type your password again here...">
-             </div>
+                </div>
 
-             <div class="form-group">
-                 <label>VERIFICATION CODE:</label>
-                 <input type="text" name="code" required class="form-control rounded-pill form-control-lg" placeholder="Type your verification code here...">
-             </div>
+                <div class="form-group">
+                    <label>VERIFICATION CODE:</label>
+                    <input type="text" name="code" required class="form-control rounded-pill form-control-lg" placeholder="Type your verification code here...">
+                </div>
 
-             <input type="submit" name="reset-password" value="CONFIRM" class="mt-3 btn rounded-pill btn-lg btn-custom btn-block"/>
+                <input type="submit" name="reset-password" value="CONFIRM" class="mt-3 btn rounded-pill btn-lg btn-custom btn-block"/>
 
-             <p class="mt-3 font-weight-normal"><a href="http://localhost:8080/sarga-bogre-gorbe-bogre/login.html"><strong>Sign in!</strong></a></p>
-         </form>
+                 <p class="mt-3 font-weight-normal"><a href="http://localhost:8080/sarga-bogre-gorbe-bogre/login.html"><strong>Sign in!</strong></a></p>
+             </form>
 
+        </div>
      </div>
+</div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/chart-area-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>
    </body>
+   
  </html>
