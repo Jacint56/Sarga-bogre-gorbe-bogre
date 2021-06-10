@@ -19,18 +19,18 @@ if(isset($_POST['button'])){
             
             if(password_verify($password, $row['pass'])){
                 
-                //setcookie("member_login", $email, time() + (86400), "/");
                 $_SESSION["member_login"] = $email;
-                //setcookie("member_password", $password, time() + (86400 ), "/");
                 $_SESSION["member_password"] = $password;
-                //setcookie("name", $row["name"], time() + (86400 ), "/");
                 $_SESSION["name"] = $row["name"];
-                //setcookie("lastname", $row["lname"], time() + (86400 ), "/");
                 $_SESSION["lastname"] = $row["lname"];
 
-
-               	//session_set_cookie_params("member_login", $email, time()+3600,'/');
-                //session_set_cookie_params("member_password", $password, time()+3600,'/');
+                if(isset($_GET["housemanage"])){
+                    $update_query = "UPDATE person SET id_house_manage WHERE email = :email";
+                    $updatequery = $conn -> prepare($update_query);
+                    $updatequery -> bindValue(':email1',$email);
+                    $updatequery -> execute();
+                }
+                
 
 
                	$insert_into_login = "INSERT INTO login(LoginID,IP, Browser,Time) VALUES ("
@@ -58,7 +58,7 @@ if(isset($_POST['button'])){
                     
                 }
 
-            	//echo $success_message;
+            	
             }
             else{
                 a:

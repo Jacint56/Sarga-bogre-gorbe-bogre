@@ -50,7 +50,7 @@ if(isset($_GET["housemanage"])){
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Üdvözöljük!</h1>
                                     </div>
-                                    <form class="user" method="POST" action="./backend_php/login.php?name=<?php echo $houseManage ?>">
+                                    <form class="user" method="POST" action="./backend_php/login.php?housemanage=<?php echo $houseManage ?>">
                                         <div class="form-group">
                                             <label for="InputEmail">E-mail:</label>
                                             <input type="email" class="form-control form-control-user"
@@ -79,7 +79,7 @@ if(isset($_GET["housemanage"])){
                                         <a class="small" href="forgot-password.html">Elfelejtette a jelszavát?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html?name=<?php echo $houseManage ?>">Regisztráljon most!</a>
+                                        <a class="small" href="registerescsatlakozas.php?name=<?php echo $houseManage ?>">Regisztráljon most!</a>
                                     </div>
                                 </div>
                             </div>

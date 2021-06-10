@@ -47,16 +47,24 @@ if(isset($_POST['button'])){
         $success_message = "Ez a jelszó nem használható, írjon be újat!";
     }
     else{
-        $sql_insert_registration = "INSERT INTO person (name, lname,phone, address, pass, email)
-        values (:fname1, :lname1, :phone1,:address1,:pass1,:email1)";
+        $sql_insert_registration = "INSERT INTO person (name, lname,phone, address, pass, email, verification, rank, id_house_manage)
+        values (:fname1, :lname1, :phone1,:address1,:pass1,:email1, NULL, 0,:id_house)";
         $query = $conn -> prepare($sql_insert_registration);
+        if(isset($_GET["housemanage"])){
+            $query -> bindValue(':id_house',$_GET["housemanage"]);
+        }
+        else{
+            $query -> bindValue(':id_house',0);
+        }
+        
+        
         $query->bindValue(':fname1',$fname);
         $query->bindValue(':lname1',$lname);
         $query->bindValue(':phone1',$phone);
         $query->bindValue(':address1',$address);
         $query->bindValue(':pass1',$md5_pass);
         $query->bindValue(':email1',$email);
-        //$query->bindParam(':rank1',$fname); //NEM TUDOM A DEFAULT hogy viselkedig
+        
         $query -> execute();
         $lastInsertID = $conn -> lastInsertID();
         if($lastInsertID > 0){
