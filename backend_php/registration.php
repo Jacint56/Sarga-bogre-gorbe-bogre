@@ -1,24 +1,112 @@
 <?php
 require_once "db_config.php";
 
-
+/*
+function ekezettelenites($szo){
+    $betuk = array("ő","ú","é","á","ű","ü","ó","ö","í");
+    $Nbetuk = array("Ő","Ú","É","Á","Ű","Ü","Ó","Ö","Í");
+    $letters = array("o","u","e","a","u","u","o","o","i");
+    $Bletters = array("O","U","E","A","U","U","O","O","I");
+    $chars = str_split($szo);
+    $ujszo = "";
+    foreach ($chars as $char) {
+        $tru = true;
+        if($char == $betuk[0]){
+            $ujszo .= $letters[0];
+            $tru = false;
+        }
+        if($char == $betuk[1]){
+            $ujszo .= $letters[1];
+            $tru = false;
+        }
+        if($char == $betuk[2]){
+            $ujszo .= $letters[2];
+            $tru = false;
+        }
+        if($char == $betuk[3]){
+            $ujszo .= $letters[3];
+            $tru = false;
+        }
+        if($char == $betuk[4]){
+            $ujszo .= $letters[4];
+            $tru = false;
+        }
+        if($char == $betuk[5]){
+            $ujszo .= $letters[5];
+            $tru = false;
+        }
+        if($char == $betuk[6]){
+            $ujszo .= $letters[6];
+            $tru = false;
+        }
+        if($char == $betuk[7]){
+            $ujszo .= $letters[7];
+            $tru = false;
+        }
+        if($char == $betuk[8]){
+            $ujszo .= $letters[8];
+            $tru = false;
+        }
+        if($char == $Nbetuk[0]){
+            $ujszo .= $Bletters[0];
+            $tru = false;
+        }
+        if($char == $Nbetuk[1]){
+            $ujszo .= $Bletters[1];
+            $tru = false;
+        }
+        if($char == $Nbetuk[8]){
+            $ujszo .= $Bletters[8];
+            $tru = false;
+        }
+        if($char == $Nbetuk[2]){
+            $ujszo .= $Bletters[2];
+            $tru = false;
+        }
+        if($char == $Nbetuk[3]){
+            $ujszo .= $Bletters[3];
+            $tru = false;
+        }
+        if($char == $Nbetuk[4]){
+            $ujszo .= $Bletters[4];
+            $tru = false;
+        }
+        if($char == $Nbetuk[5]){
+            $ujszo .= $Bletters[5];
+            $tru = false;
+        }
+        if($char == $Nbetuk[6]){
+            $ujszo .= $Bletters[6];
+            $tru = false;
+        }
+        if($char == $Nbetuk[7]){
+            $ujszo .= $Bletters[7];
+            $tru = false;
+        }
+        if($tru){
+            $ujszo .= $char;
+        }
+    }
+    return $ujszo;
+}*/
 
 if(isset($_POST['button'])){
     $fname = $_POST['FirstName'];
     $lname = $_POST['LastName'];
     $email = $_POST['InputEmail'];
+    $splitted_email = explode("@", $email);
     $address = $_POST['InputAddress'];
     $phone = $_POST['InputPhone'];
     $pass = $_POST['InputPassword'];
     $md5_pass = password_hash($pass, PASSWORD_DEFAULT);
     $repeat_pass = $_POST['RepeatPassword'];
     $error = $success_message = NULL;
-    $user_name = "";
+    $user_email = "";
     //user match
     $user_match = $conn -> prepare("SELECT Email from person where Email = :user_email");
     $user_match -> execute(array(':user_email' => $email));
     while($row = $user_match -> fetch(PDO::FETCH_ASSOC)){
-        $user_name = $row['Email'];
+        $user_email = $row['Email'];
 
     
     }
@@ -34,7 +122,7 @@ if(isset($_POST['button'])){
     else if(empty($phone)){
         $success_message = "Írja be a telefonszámát!";
     }
-    else if($user_name == $email){
+    else if($user_email == $email){
         $success_message = "Ezzel az e-mail címmel, már regisztráltak!";
     }
     else if($pass == "" || $repeat_pass == "" ){

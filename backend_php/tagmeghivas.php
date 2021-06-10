@@ -2,9 +2,9 @@
 
 session_Start();
 require_once "db_config.php";
-
-if(isset($_POST['submitInvite'])){
-    if(str_contains($_POST['submitInvite'], '@')){
+if(isset($_POST['invitedPersonName'])){
+    if(strpos($_POST['invitedPersonName'], '@')!== false){
+        
         $select_user_and_pass = "SELECT * from person where email = :email1";
     
         $login_query = $conn -> prepare($select_user_and_pass);
@@ -12,7 +12,8 @@ if(isset($_POST['submitInvite'])){
         $login_query -> execute();
         if($login_query -> rowCount() ==1){
             if($row = $login_query->fetch()){
-                header('Location: emailes_meghivo.php?email='. $_SESSION["member_login"] . '&name='. $_SESSION["name"]. '&haztartas=' . $row["id_house_manage"]);
+                header('Location: emailes_meghivo.php?email='. $_POST["invitedPersonName"] . '&name='. $_SESSION["name"]. '&haztartas=' . $row["id_house_manage"]);
+                exit();
             }
         }
 
