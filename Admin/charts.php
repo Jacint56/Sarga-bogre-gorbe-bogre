@@ -274,29 +274,57 @@ $arr = array();
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Charts</h1>
-                    <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
-                        The charts below have been customized - for further customization options, please visit the <a
-                            target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
-                            documentation</a>.</p>
+            
+                    
+                            <div class="row">
 
-                    <!-- Content Row -->
+                                <div class="col-xl-12 col-lg-12">
+
+                                    <!-- Bar Chart -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Listázni kívánt év kiválasztása</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="charts.php" method="POST">
+                                                <div class="form-group">
+                                                <label for="inputYear">Év megadása:</label>
+                                                <input type="text" class="form-control" name="inputYear" id="inputYear" placeholder="Vigye be a kilistázni kívánt évet pl.: 2021">
+                                                </div>
+                                                <button type="submit" name="insertYear" class="btn btn-primary" id="insertYear">Adat lekérése</button>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                </div>
+                                <?php   
+                                    if(isset($_POST['insertYear'])){
+                                        $year = $_POST['inputYear'];
+                                    }
+                                    else{
+                                        $year = date("Y");
+                                    }
+                                ?>
+                    
+
                     <div class="row">
 
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-12 col-lg-12">
 
                             <!-- Bar Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                    <h6 class="m-0 text-primary" style="font-size:24px;"><?php echo $year. " költségei. Az aktuális hónap: "."<b>". date("M")."</b>"; ?> </h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar" >
                                        
                                             <canvas id="myBarChart"></canvas>
                                     </div>
-                                    <hr>
-                                    Styling for the bar chart can be found in the
-                                    <code>/js/demo/chart-bar-demo.js</code> file.
                                 </div>
                             </div>
 
@@ -304,6 +332,148 @@ $arr = array();
 
                         
                     </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <div class="col-xl-12 col-lg-12">
+
+                            <!-- Bar Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $year. " költségei"; ?> </h6>
+                                </div>
+                                <div class="card-body">
+                                <table class="table table-bordered">
+                                <tr>
+                                    <th>Aktuális hónap</th>
+                                    <th>Költség neve</th>
+                                </tr>
+                                    
+                                <?php
+                            
+                                    require_once "../backend_php/db_config.php";
+                                    $select_user_and_pass = "SELECT * from expense_category";
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                    $data = $login_query->fetchAll();
+                                    foreach($data as $row ){
+                                        //unset($id, $name);
+                                        $id = $row['ID'];
+                                        $expenseCategoryName = $row['expenses_category_name']; 
+
+                                        echo "<tr>
+                                        <td>".$id ."</td>".
+                                        "<td>".$expenseCategoryName ."</td>".
+                                       "<td>
+                                        <form action='#' method='POST'>
+                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
+                                        
+                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
+                                        </form>
+                                        </td>";
+                                    }
+
+                                    echo "</tr>
+
+                                    ";
+                                    
+                                    
+
+                                ?>
+                                </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <div class="col-xl-12 col-lg-12">
+                                    <!-- Insert form -->
+                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                                 <div class="form-group">
+                                    <label for="selectExpenseCategory">Költség kategória megadása:</label>
+                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
+
+                                        <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
+                                        <?php
+                                            session_Start();
+                                            require_once "../backend_php/db_config.php";
+                                            $select_user_and_pass = "SELECT * from expense_category";
+                                            $login_query = $conn -> prepare($select_user_and_pass);
+                                            $login_query -> execute();
+                                            $data = $login_query->fetchAll();
+                                            foreach($data as $row ){
+
+                                                unset($id, $name);
+                                                $id = $row['ID'];
+                                                $name = $row['expenses_category_name']; 
+                                                echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
+                                            }
+                                            
+
+                                        ?>
+                                    </select>
+                                    </div>
+                              </form>
+                            <!-- Bar Chart -->
+                            <!--  Echo-zva lesz -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $year. " költségei"; ?> </h6>
+                                </div>
+                                <div class="card-body">
+                                <table class="table table-bordered">
+                                <tr>
+                                    <th>Aktuális hónap</th>
+                                    <th>Költség neve</th>
+                                </tr>
+                                    
+                                <?php
+                            
+                                    require_once "../backend_php/db_config.php";
+                                    $select_user_and_pass = "SELECT * from expense_category";
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                    $data = $login_query->fetchAll();
+                                    foreach($data as $row ){
+                                        //unset($id, $name);
+                                        $id = $row['ID'];
+                                        $expenseCategoryName = $row['expenses_category_name']; 
+
+                                        echo "<tr>
+                                        <td>".$id ."</td>".
+                                        "<td>".$expenseCategoryName ."</td>".
+                                       "<td>
+                                        <form action='#' method='POST'>
+                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
+                                        
+                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
+                                        </form>
+                                        </td>";
+                                    }
+
+                                    echo "</tr>
+
+                                    ";
+                                    
+                                    
+
+                                ?>
+                                </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+                     <!--  Echo-zva lesz -->
 
                 </div>
                 <!-- /.container-fluid -->
@@ -388,8 +558,9 @@ $arr = array();
             $arr = [];
             for($i=1;$i<13;$i++){
                 $select_query = "SELECT sum(price) AS 'osszegahonapra'
-                FROM expenses WHERE MONTH(date) = " . $i;
+                FROM expenses WHERE MONTH(date) = " . $i . " and YEAR(date) = :ev1 ";
                 $select_expenses_query = $conn -> prepare($select_query);
+                $select_expenses_query ->bindValue(':ev1',$year);
                 $select_expenses_query -> execute();
                 $data = $select_expenses_query->fetchAll();
                 foreach($data as $row ){
