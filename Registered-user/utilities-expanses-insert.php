@@ -6,7 +6,7 @@ session_start();
 <head>
 
     <script type="text/javascript">
-        window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
+        //window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
 	</script>
 
     <meta charset="utf-8">
@@ -65,7 +65,7 @@ session_start();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -450,11 +450,11 @@ session_start();
                             <table class="table table-bordered">
                                 <tr>
                                     <th>ID</th>
-                                    <th>SzemelyID</th>
+                                    <th>Szemely neve</th>
                                     <th>Kivansg neve</th>
                                     <th>Kivansg kategoria</th>
                                     <th>Kivansg ara</th>
-                                    
+                                    <th>Datum</th>
 
                                     
                                 
@@ -474,6 +474,9 @@ session_start();
                                             $leader = true;
                                             $housemanageID =$row["id_house_manage"];
                                             $person = $row["ID"];
+                                            echo "<th>Lehetoseg</th>
+                                            </tr>
+                                            ";
                                         }
                                     }
                                 }

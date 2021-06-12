@@ -58,7 +58,7 @@ session_start();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Menü
+                Interface
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -169,18 +169,35 @@ session_start();
                     </button>
 
                     <!-- Topbar Search -->
-                    <!--<form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
+                            <?php 
+
+                        require_once "../backend_php/db_config.php";
+                            $select_user_and_pass = "SELECT * from person where email = :email1";
+    
+                            $login_query = $conn -> prepare($select_user_and_pass);
+                            $login_query -> bindValue(':email1',$_SESSION["member_login"]);
+                            $login_query -> execute();
+
+
+                            if($login_query -> rowCount() ==1){
+                                if($row = $login_query->fetch()){ 
+                                    $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
+                                    
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                
+                                
+                                    if($login_query -> rowCount() ==1){
+                                        if($row = $login_query->fetch()){
+                                            echo  $row["Name"];
+                                        }
+                                    }
+                                }
+                            }
+                        ?></span>
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">

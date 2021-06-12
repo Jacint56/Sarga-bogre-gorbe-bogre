@@ -40,7 +40,7 @@ session_start();
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">HouseKeeper</div>
+                <div class="sidebar-brand-text mx-3">HouseKeeper </div>
             </a>
 
             <!-- Divider -->
@@ -170,18 +170,35 @@ session_start();
                     </button>
 
                     <!-- Topbar Search -->
-                    <!--<form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> -->
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
+                            <?php 
+
+                        require_once "../backend_php/db_config.php";
+                            $select_user_and_pass = "SELECT * from person where email = :email1";
+    
+                            $login_query = $conn -> prepare($select_user_and_pass);
+                            $login_query -> bindValue(':email1',$_SESSION["member_login"]);
+                            $login_query -> execute();
+
+
+                            if($login_query -> rowCount() ==1){
+                                if($row = $login_query->fetch()){ 
+                                    $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
+                                    
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                
+                                
+                                    if($login_query -> rowCount() ==1){
+                                        if($row = $login_query->fetch()){
+                                            echo  $row["Name"];
+                                        }
+                                    }
+                                }
+                            }
+                        ?></span>
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">
@@ -272,8 +289,8 @@ session_start();
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                          <!-- Earnings (Monthly) Card Example -->
+                          <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -651,15 +668,7 @@ session_start();
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
-    <script>
-        function yetClicked(){
-
-            var inviteButton = getElementById("yetInvited");
-            inviteButton.style.display = 'none';
-
-
-        }
-    </script>
+    
 </body>
 
 </html>
