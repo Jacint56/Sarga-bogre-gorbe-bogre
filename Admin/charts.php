@@ -78,7 +78,7 @@ $arr = array();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menü
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -293,9 +293,9 @@ $arr = array();
                                     <div class="chart-bar" >
                                        
                                             
-                                            <iframe src="Registered-user/charts.php" frameborder="0">
+                                           
                                             <canvas id="myBarChart"></canvas>
-                                            </iframe>
+                                         
                                     </div>
                                     <hr>
                                     Styling for the bar chart can be found in the

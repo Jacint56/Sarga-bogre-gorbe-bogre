@@ -87,7 +87,7 @@ session_start();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menü
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->

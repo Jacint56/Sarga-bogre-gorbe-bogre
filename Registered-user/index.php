@@ -283,13 +283,7 @@ session_start();
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                                         </div>
                                         <div class="col-auto">
-                                        <form method="POST" action="profi-settings-data.php">
-                                                    <div class="form-group">
-                                                        <label for="changeFirstName">Keresztnév szerkesztése:</label>
-                                                        <input type="text" class="form-control" id="changeFirstName" name="changeFirstName">
-                                                    </div>
-                                                    <button type="submit" name="updateFirstName" id="updateFirstName" class="btn btn-primary">Módosítás</button>
-                                                </form>
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
