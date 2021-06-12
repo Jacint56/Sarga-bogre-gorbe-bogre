@@ -56,7 +56,7 @@ $arr = array();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -78,7 +78,7 @@ $arr = array();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menü
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -292,10 +292,7 @@ $arr = array();
                                 <div class="card-body">
                                     <div class="chart-bar" >
                                        
-                                            
-                                            <iframe src="Registered-user/charts.php" frameborder="0">
                                             <canvas id="myBarChart"></canvas>
-                                            </iframe>
                                     </div>
                                     <hr>
                                     Styling for the bar chart can be found in the
