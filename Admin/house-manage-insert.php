@@ -88,9 +88,9 @@ session_start();
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                        
-                        <a class="collapse-item" href="house-manage-insert.php">Colors</a>
-                        <a class="collapse-item" href="utilities-border.php">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.php">Animations</a>
+                        <a class="collapse-item" href="house-manage-insert.php">Háztartás hozzáadása</a>
+                        <!--<a class="collapse-item" href="utilities-border.php">Borders</a>-->
+                        <a class="collapse-item" href="main-panel.php">Személyek módosítása</a>
                         <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
                 </div>
@@ -194,7 +194,6 @@ session_start();
                             }
                         ?></span>
                     </div>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">
                     

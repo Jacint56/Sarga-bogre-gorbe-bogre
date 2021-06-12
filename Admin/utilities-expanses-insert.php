@@ -1,12 +1,27 @@
 <?php
 session_start();
+require_once "../backend_php/db_config.php";
+$select_user_and_pass = "SELECT * from person where email = :email1";
+$login_query = $conn -> prepare($select_user_and_pass);
+$login_query -> bindValue(':email1',$_SESSION['member_login']);
+$login_query -> execute();
+if($login_query -> rowCount() ==1){
+    if($row = $login_query->fetch()){
+        if($row['rank'] == 1 || $row['rank']==3 ){
+            //echo "<script>alert('Üdvözlet Admin!');</script>";
+            //header("Location ../Admin/index.php");
+        }
+        else
+            header("Location ../404.html");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <script type="text/javascript">
-        window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
+        //window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
 	</script>
 
     <meta charset="utf-8">
@@ -117,8 +132,8 @@ session_start();
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                            
-                    <!--<a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
-                        <a class="collapse-item" href="utilities-border.php">Borders</a>
+                    <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
+                       <!-- <a class="collapse-item" href="utilities-border.php">Borders</a>
                         <a class="collapse-item" href="utilities-animation.php">Animations</a>-->
                         <a href="main-panel.php"class="collapse-item">Személyek - módosítása</a>
                         <a class="collapse-item " href="utilities-expanses-insert.php">Költségek hozzáadása</a>
@@ -196,25 +211,36 @@ session_start();
                     </button>
 
                     <!-- Topbar Search -->
-
-                   <!-- <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
-                            </span>
-                    </div>-->
+                            <?php 
 
-                    <!--<form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>-->
+                        require_once "../backend_php/db_config.php";
+                            $select_user_and_pass = "SELECT * from person where email = :email1";
+    
+                            $login_query = $conn -> prepare($select_user_and_pass);
+                            $login_query -> bindValue(':email1',$_SESSION["member_login"]);
+                            $login_query -> execute();
 
+
+                            if($login_query -> rowCount() ==1){
+                                if($row = $login_query->fetch()){ 
+                                    $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
+                                    
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                
+                                
+                                    if($login_query -> rowCount() ==1){
+                                        if($row = $login_query->fetch()){
+                                            echo  $row["Name"];
+                                        }
+                                    }
+                                }
+                            }
+                        ?></span>
+                    </div>
+                   
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">
                     
@@ -313,12 +339,12 @@ session_start();
                             <!-- Insert form -->
                             <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
-                                    <!-- <label for="selectExpenseCategory">Költség kategória megadása:</label>
+                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
 
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         
-                                    </select>-->
+                                    </select>
                                     </div>
                                     
                                     <div class="form-group">
@@ -326,7 +352,7 @@ session_start();
                                     <input type="text" class="form-control" id="inputExpenseCategory" name="inputExpenseCategory" placeholder="Költség kategória pl.: élelem">
                                     
                                 </div>
-                                <!--<div class="form-group">
+                                <div class="form-group">
                                     <label for="inputExpenseDetails">Költség leírása:</label>
                                     <input type="text" class="form-control" id="inputExpenseDetails" name="inputExpenseDetails" placeholder="Költség leírása pl.: banán">
                                     
@@ -334,13 +360,13 @@ session_start();
                                 <div class="form-group">
                                     <label for="inputExpensePrice">Költség ára:</label>
                                     <input type="text" class="form-control" id="inputExpensePrice" name="inputExpensePrice" placeholder="Költség ára">
-                                </div>-->
+                                </div>
                                 <button type="submit" name="insertExpense" id="insertExpense" class="btn btn-primary">Hozzáadás</button>
                             </form>
                         </div>
-                        <!--<div class="col-lg-6" >-->
+                        <div class="col-lg-6" >
                             <!-- Insert form -->
-                           <!-- <form method="POST" action="../backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
+                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
                             <div class="form-group">
                                     <label for="selectWishCategory">Költség kategória megadása:</label>
                                     <select name="selectWishCategory" id="selectWishCategory">
@@ -379,15 +405,15 @@ session_start();
                                 
                                 <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
                             </form>
-                        </div>-->
+                        </div>
                     </div>
-                   <!-- <div class="row" style="padding-top:10px;">
+                    <div class="row" style="padding-top:10px;">
                         <div class="col-lg-12">
                         <form method="POST" id="inviteMemberToHouseManage" name="inviteMemberToHouseManage">         
                             <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
                         </form>
                         </div>
-                    </div>-->
+                    </div>
                     <?php
                         if(isset($_POST['inviteMemberToHouseManage'])){
                             echo "
