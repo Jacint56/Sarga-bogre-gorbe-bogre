@@ -331,7 +331,7 @@ session_start();
                                             $update_invite = "UPDATE invite set accepted =".$_POST['acceptInvite'] . " where invited_person =" . $rowo["ID"] . " AND id_invite=".$_POST['acceptInvite'];
                                             $invite_query = $conn -> prepare($update_invite);
                                             $invite_query -> execute();
-                                            $update_person_invite = "UPDATE person set id_house_manage=". $housemanageTo;
+                                            $update_person_invite = "UPDATE person set id_house_manage=". $housemanageTo ." and rank = 1";
                                             $person_invite = $conn -> prepare($update_person_invite);
                                             $person_invite -> execute();
                                             if($row = $person_invite->fetch()){

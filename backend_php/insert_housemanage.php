@@ -17,7 +17,7 @@ if(isset($_POST['insertHouseManage'])){
     $select_user_and_pass = "SELECT * from person where email = :email1";
     
     $login_query = $conn -> prepare($select_user_and_pass);
-    $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
+    $login_query -> bindValue(':email1',$_SESSION["member_login"]);
     $login_query -> execute();
 
     $name = $_POST["inputHouseManageName"];
@@ -40,14 +40,22 @@ if(isset($_POST['insertHouseManage'])){
                 $query->bindValue(':parameterneve',$lastInsertID);
                 $query->bindValue(':id',$row["ID"]);
                 if($query -> execute()){
-                    header('Location: ../utilities-expanses-insert.php');
+                    $updatePersoneRank = "update person set rank = 2 where name = :id1";
+                    $updateQuery = $conn -> prepare($updatePersoneRank);
+                    $updateQuery -> bindValue(':id1',$_SESSION['name']);
+                   
+                    if( $updateQuery -> execute()){
+                        header('Location: ../Registered-user/utilities-expanses-insert.php');
+                    }
+                    else
+                    echo "Nem sikerult az elso adatbevitel";
                 }
                 else
-                     echo "Nem sikerult az elso adatbevitel";
+                     echo "Nem sikerult a masodik adatbevitel";
                 
             }
             else{
-                echo "Nem sikerult a masodik adatbevitel";
+                echo "Nem sikerult a harmadik adatbevitel";
                 
                 
             }

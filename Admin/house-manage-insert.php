@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Személyek / családok módosítása - törlése</title>
+    <title>Háztartás hozzáadása</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -22,8 +22,8 @@ session_start();
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-     <!-- Custom icon-->
-     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+    <!-- Custom icon-->
+    <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
 </head>
 
@@ -36,21 +36,21 @@ session_start();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">HouseKeeper </div>
+                <div class="sidebar-brand-text mx-3">HouseKeeper</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.php">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Személyek / családok módosítása - törlése</span></a>
+                    <span>Kezdőlap</span></a>
             </li>
 
             <!-- Divider -->
@@ -58,7 +58,7 @@ session_start();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menü
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -78,8 +78,8 @@ session_start();
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Lehetőségek</span>
@@ -87,12 +87,11 @@ session_start();
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+                       
                         <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
-                        <!--<a class="collapse-item" href="utilities-border.php">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.php">Animations</a>-->
-                        <a href="main-panel.php"class="collapse-item">Személyek - módosítása</a>
-                        <a class="collapse-item " href="utilities-expanses-insert.php">Költségek hozzáadása</a>
+                        <!--<a class="collapse-item" href="utilities-border.php">Borders</a>-->
+                        <a class="collapse-item" href="main-panel.php">Személyek módosítása</a>
+                        <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
                 </div>
             </li>
@@ -122,7 +121,7 @@ session_start();
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Egyéb oldalak:</h6>
                         <a class="collapse-item active" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.php">Blank Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
@@ -148,8 +147,6 @@ session_start();
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-            
 
         </ul>
         <!-- End of Sidebar -->
@@ -198,7 +195,6 @@ session_start();
                             }
                         ?></span>
                     </div>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">
                     
@@ -231,9 +227,6 @@ session_start();
 
                         ?>
                   
-
-                        
-
                         <div class="topbar-divider d-none d-sm-block"></div>
                         
                         <!-- Nav Item - User Information -->
@@ -283,178 +276,31 @@ session_start();
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Személyek / családok módosítása - törlése</h1>
-                        
-                    </div>
+                    <h1 class="h3 mb-1 text-gray-800">Háztartás hozzáadása</h1>
+                    <p class="mb-4">
+                        Ezen az oldalon hozhat létre új háztartást.
+                    </p>
 
                     <!-- Content Row -->
                     <div class="row">
-                                <div class="col-lg-12">       
-                                    <form method="POST" action="#">     
-                                        <input type="text" id="keres" name="keres" placeholder="Szemely kereses">    
-                                        <select class="btn btn-secondary" name="selectSomething">                   
-                                            <option value="0">Személy</option>            
-                                            <option value="1">Család</option>          
-                                        </select>                     
-                                        <input type="submit" name="btn" class="btn btn-primary" value="Keresés">        
-                                    </form>
-                                    <div class="col-lg-12">
-                                    <table class='table' id='dataTable' width='100%'>
-                                <?php
-                                require_once "../backend_php/db_config.php";
-                                if(isset($_POST['btn'])){
-                                    if($_POST['selectSomething'] == 0){
-                                        echo"
-                                        
-                                            <thead class='thead-dark'>      
-                                            <tr>  
-                                                <th>ID</th>  
-                                                <th>Keresztnév</th>
-                                                <th>Vezetéknév</th>  
-                                                <th>Telefonszám</th>
-                                                <th>Cím</th>  
-                                                <th>E-mail</th>
-                                                <th>Hitelesítés</th>  
-                                                <th>Rang</th>
-                                                <th>Háztartás ID</th>
-                                            </tr>
-                                        </thead>
-                                        ";
-                                        $keresettSzemely = $_POST['keres'];
-                                    $select_user_and_pass = "SELECT * from person where name like '%$keresettSzemely%'";
-                                    $login_query = $conn -> prepare($select_user_and_pass);
-                                    $login_query -> execute();
-                                    $data = $login_query->fetchAll();
-                                    foreach($data as $row ){
-                                        //unset($id, $name);
-                                        $id = $row['ID'];
-                                        $name = $row['name']; 
-                                        $lname = $row['lname'];
-                                        $phone = $row['phone'];
-                                        $address = $row['address'];
-                                        $email = $row['email'];
-                                        $verification = $row['verification'];
-                                        $rank = $row['rank'];
-                                        $idHouseManage = $row['id_house_manage'];
 
-                                        //$name = $row['expenses_category_name'];
-                                        //echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
-                                        echo "<tr>
-                                        <td>".$id ."</td>".
-                                        "<td>".$name ."</td>".
-                                        "<td>".$lname ."</td>".
-                                        "<td>".$phone ."</td>".
-                                        "<td>".$address ."</td>".
-                                        "<td>".$email ."</td>".
-                                        "<td>".$verification ."</td>".
-                                        "<td>".$rank ."</td>".
-                                        "<td>".$idHouseManage ."</td>".
-                                        "<td>".
-                                        "<form action='main-panel.php' method='POST' >".
-                                        "<input type='text' class='form-control' name='newRank' id='newRank' placeholder='A szemely uj rangja pl.: 2'>".
-                                        "<button class='btn btn-primary' name='updateUserRank' id='updateUserRank' type='submit' value='$id'  >" .$name." Felhasználó rang átírása</button>".
-                                        " </form>
-                                        </td>
-                                        </tr>"
-                                        ;
-                                    }
+                        <div class="col-lg-6" >
 
-                                }
+                            <!-- Insert form -->
+                            <form method="POST" action="../backend_php/insert_housemanage.php" id="inputHouseManageForm" name="inputHouseManageForm">
 
-                                   
-                                }
-                                if(isset($_POST['btn'])){
-                                    if($_POST['selectSomething'] == 1){
-                                        echo"
-                                        
-                                            <thead class='thead-dark'>      
-                                            <tr>  
-                                                <th>ID</th>  
-                                                <th>Háztartás neve</th>
-                                                <th>Háztartás leírása</th>  
-                                                <th>Létrehozás dátuma</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        ";
-                                        $keresettCsalad = $_POST['keres'];
-                                    $select_user_and_pass = "SELECT * from  house_manage where Name like '%$keresettCsalad%'";
-                                    $login_query = $conn -> prepare($select_user_and_pass);
-                                    $login_query -> execute();
-                                    $data = $login_query->fetchAll();
-                                    foreach($data as $row ){
-                                        //unset($id, $name);
-                                        $id = $row['ID'];
-                                        $name = $row['Name']; 
-                                        $description = $row['Description'];
-                                        $date = $row['Date'];
-                                        
-
-                                        //$name = $row['expenses_category_name'];
-                                        //echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
-                                        echo "<tr>
-                                        <td>".$id ."</td>".
-                                        "<td>".$name ."</td>".
-                                        "<td>".$description ."</td>".
-                                        "<td>".$date ."</td>".
-                                        "<td>".
-                                        "<form action='main-panel.php' method='POST' >".
-                                        "<button class='btn btn-primary' name='delete' type='submit' value='$id' >" . $name ."Háztartás törlése</button>".
-                                        " </form>
-                                        </td>
-                                        </tr>"
-                                        ;
-                                    }
-                                   
+                                 <div class="form-group">
+                                    <label for="inputHouseManageName">Háztartás neve:</label>
+                                    <input type="text" class="form-control" id="inputHouseManageName" name="inputHouseManageName" placeholder="Háztartás neve pl.: Kis - család">
                                     
-
-                                }
-                                
-                                   
-                            }
-
-                                ?>
-                                
-                            </table>
-                                    <?php
-                                        if(isset($_POST['delete'])){
-                                    
-                                            $houseID = $_POST['delete'];
-                                            $deleteHouseManage = "DELETE FROM house_manage WHERE ID = :house1" ;
-                                            $deleteQuery = $conn -> prepare($deleteHouseManage);
-                                            $deleteQuery -> bindValue(':house1',$houseID);
-                                            if($deleteQuery -> execute()){
-                                                echo "<script>alert($houseID);</script>";
-                                                
-                                            }
-                                            else
-                                                echo"<script>alert('Glitch in the Matrix');</script>";
-                                        }
-                                        if(isset($_POST['updateUserRank'])){
-                                            $newRank = $_POST['newRank'];
-                                            $userID = $_POST['updateUserRank'];
-                                            
-                                            $upadteUserRank = "UPDATE person set rank = :rank1 WHERE ID = :id1";
-                                            $updateQuery = $conn -> prepare($upadteUserRank);
-                                            $updateQuery -> bindValue(':rank1',$newRank);
-                                            $updateQuery -> bindValue(':id1',$userID);
-                                            if($updateQuery -> execute()){
-                                                echo "<script>alert('Sikeres átírás');</script>";
-                                                
-                                            }
-                                            else
-                                                echo"<script>alert('Glitch in the Matrix');</script>";
-                                        }
-                                    ?>
-                                
-                    </div>
-                        
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        
-
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputHouseManageDescription">Háztartás leírása:</label>
+                                    <input type="text" class="form-control" id="inputHouseManageDescription" name="inputHouseManageDescription" placeholder="Háztartás leírása pl.: Hány személy tagja a háztartásnak">
+                                </div>
+                                <button type="submit" name="insertHouseManage" id="insertHouseManage" class="btn btn-primary">Hozzáadás</button>
+                            </form>
+                        </div>
                         
                     </div>
 
@@ -505,7 +351,6 @@ session_start();
         </div>
     </div>
 
-
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -515,13 +360,6 @@ session_start();
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 
