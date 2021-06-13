@@ -1,11 +1,13 @@
 <?php
 session_start();
+   
 if(isset($_POST['insertYear'])){
     $year = $_POST['inputYear'];
 }
 else{
     $year = date("Y");
 }
+$housemanage = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@ else{
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Charts</title>
+    <title>Költség keret beállítása</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -74,13 +76,13 @@ else{
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>További információk</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.php">Buttons</a>
-                        <a class="collapse-item" href="cards.php">Cards</a>
+                        <h6 class="collapse-header">Tudjon meg többet:</h6>
+                        <a class="collapse-item" href="../about-us.php">Rólunk</a>
+                        
                     </div>
                 </div>
             </li>
@@ -98,13 +100,12 @@ else{
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                            
-                           <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
-                              <!-- <a class="collapse-item" href="utilities-border.php">Borders</a>-->
-                               <a class="collapse-item" href="cost-frame.php">Költség keret</a>
-                               <a href="main-panel.php"class="collapse-item">Személyek - módosítása</a>
-                               <a class="collapse-item " href="utilities-expanses-insert.php">Költségek hozzáadása</a>
-                           </div>
+                    <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
+                        <a class="collapse-item" href="cost-frame.php">Költség keret</a>
+                        <a class="collapse-item" href="main-panel.php">Személyek módosítása</a>
+                        <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
+                </div>
                 </div>
             </li>
 
@@ -130,10 +131,7 @@ else{
                         <a class="collapse-item" href="../login.html">Belépés</a>
                         <a class="collapse-item" href="../register.html">Regisztráció</a>
                         <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Egyéb oldalak:</h6>
-                        <a class="collapse-item active" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        
                     </div>
                 </div>
             </li>
@@ -142,15 +140,10 @@ else{
             <li class="nav-item active">
                 <a class="nav-link" href="charts.php">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Grafikon</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -184,7 +177,7 @@ else{
 
                         require_once "../backend_php/db_config.php";
                             $select_user_and_pass = "SELECT * from person where email = :email1";
-    
+
                             $login_query = $conn -> prepare($select_user_and_pass);
                             $login_query -> bindValue(':email1',$_SESSION["member_login"]);
                             $login_query -> execute();
@@ -193,7 +186,7 @@ else{
                             if($login_query -> rowCount() ==1){
                                 if($row = $login_query->fetch()){ 
                                     $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
-                                    
+                                    $housemanage = $row["id_house_manage"];
                                     $login_query = $conn -> prepare($select_user_and_pass);
                                     $login_query -> execute();
                                 
@@ -293,7 +286,7 @@ else{
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Költség kategória</h1>
             
                     
                            
@@ -304,10 +297,10 @@ else{
 
                         <div class="col-xl-12 col-lg-12">
                                     <!-- Insert form -->
-                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                            <form method="POST" action="#" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
-                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
+                                    <select name="selectExpenseCategory" class="form-control" id="selectExpenseCategory">
 
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
@@ -329,7 +322,37 @@ else{
                                         ?>
                                     </select>
                                     </div>
+                                    <div class="form-group">
+                                    
+                                                
+                                                <label for="inputExpenseBudget">Költésg keret megadása:</label>
+                                                <input type="text" class="form-control" name="inputExpenseBudget" id="inputExpenseBudget" placeholder="Költség keret megadása pl.: Étel - 30000">
+                                                <br>
+                                                <button type="submit" name="insertExpenseBudget" class="btn btn-primary" id="insertExpenseBudget">Keret bevitele</button>
+                                           
+                                    </div>
                               </form>
+
+                              <?php
+                                if(isset($_POST["insertExpenseBudget"])) {
+                                    $category = $_POST["selectExpenseCategory"];
+                                    $budget = $_POST["inputExpenseBudget"];
+                                    $insert_into_expense_budget = "INSERT INTO expense_budget(keret,ID_house_manage, expense_category_id) VALUES(:keret,:house,:category_id)";
+                                    $query = $conn -> prepare($insert_into_expense_budget);
+                                    unset($_POST);
+                                    $query -> bindValue(':keret',$budget);
+                                    $query -> bindValue(':house',$housemanage);
+                                    $query -> bindValue(':category_id',$category);
+                                    
+
+                                    if(!($query->execute())){
+                                        echo "<script> alert('Nem sikerült hozzáadni a kívánt keretet, kérem próbálkozzon újra vagy forduljon a server felelőshöz!) </script>";
+
+                                    }
+                                }
+                                
+                              ?>
+                              
                             <!-- Bar Chart -->
                             <!--  Echo-zva lesz -->
                             <div class="card shadow mb-4">
@@ -339,40 +362,27 @@ else{
                                 <div class="card-body">
                                 <table class="table table-bordered">
                                 <tr>
-                                    <th>Aktuális hónap</th>
-                                    <th>Költség neve</th>
+                                    
+                                    <th>Költségkatergória</th>
+                                    <th>Keret</th>
                                 </tr>
                                     
                                 <?php
                             
                                     require_once "../backend_php/db_config.php";
-                                    $select_user_and_pass = "SELECT * from expense_category";
-                                    $login_query = $conn -> prepare($select_user_and_pass);
-                                    $login_query -> execute();
-                                    $data = $login_query->fetchAll();
+                                    $select_keret_es_koltseg = "SELECT keret, ID_house_manage, expense_category.expenses_category_name from expense_budget 
+                                    INNER JOIN expense_category ON expense_budget.expense_category_id = expense_category.ID where ID_house_manage = :id";
+                                    $keret_es_koltseg_query = $conn -> prepare($select_keret_es_koltseg);
+                                    $keret_es_koltseg_query -> bindValue(":id", $housemanage);
+                                    $keret_es_koltseg_query -> execute();
+                                    $data = $keret_es_koltseg_query->fetchAll();
                                     foreach($data as $row ){
-                                        //unset($id, $name);
-                                        $id = $row['ID'];
-                                        $expenseCategoryName = $row['expenses_category_name']; 
-
                                         echo "<tr>
-                                        <td>".$id ."</td>".
-                                        "<td>".$expenseCategoryName ."</td>".
-                                       "<td>
-                                        <form action='#' method='POST'>
-                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
-                                        
-                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
-                                        </form>
-                                        </td>";
+                                        <td>".$row["expenses_category_name"] ."</td>".
+                                        "<td>".$row["keret"] ."</td>";
                                     }
-
                                     echo "</tr>
-
                                     ";
-                                    
-                                    
-
                                 ?>
                                 </table>
                                 </div>
@@ -388,26 +398,13 @@ else{
                                 <div class="col-xl-12 col-lg-12">
 
                                     <!-- Bar Chart -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Listázni kívánt év kiválasztása</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <form action="charts.php" method="POST">
-                                                <div class="form-group">
-                                                <label for="inputYear">Év megadása:</label>
-                                                <input type="text" class="form-control" name="inputYear" id="inputYear" placeholder="Vigye be a kilistázni kívánt évet pl.: 2021">
-                                                </div>
-                                                <button type="submit" name="insertYear" class="btn btn-primary" id="insertYear">Adat lekérése</button>
-                                            </form>
-                                            
-                                        </div>
-                                    </div>
+                                    
 
                                 </div>
 
 
                             </div>
+                            
                     
 
 

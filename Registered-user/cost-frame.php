@@ -20,7 +20,7 @@ $housemanage = "";
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Charts</title>
+    <title>Költség keret beállítása</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -76,13 +76,13 @@ $housemanage = "";
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>További információk</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.php">Buttons</a>
-                        <a class="collapse-item" href="cards.php">Cards</a>
+                        <h6 class="collapse-header">Tudjon meg többet:</h6>
+                        <a class="collapse-item" href="../about-us.php">Rólunk</a>
+                        
                     </div>
                 </div>
             </li>
@@ -102,7 +102,7 @@ $housemanage = "";
                            
                     <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
                         <a class="collapse-item" href="cost-frame.php">Költség keret</a>
-                        <a class="collapse-item" href="utilities-animation.php">Animations</a>
+                        
                         <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
                 </div>
