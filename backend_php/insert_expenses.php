@@ -7,7 +7,7 @@ if(isset($_POST['insertExpense'])){
     $select_user_and_pass = "SELECT * from person where email = :email1";
     
     $login_query = $conn -> prepare($select_user_and_pass);
-    $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
+    $login_query -> bindValue(':email1',$_SESSION["member_login"]);
     $login_query -> execute();
 
 
@@ -24,9 +24,18 @@ if(isset($_POST['insertExpense'])){
                 $query2->bindValue(':newCategory',$_POST["inputExpenseCategory"]);
                 $query2 ->execute();
                 $query->bindValue(':id_expenses',$conn -> lastInsertID());
+
+                
             }
             else{
                 $query->bindValue('id_expenses',$_POST["selectExpenseCategory"]);
+                
+                $update_expense_budget = "UPDATE expense_budget SET keret = keret - :keret WHERE ID_house_manage = :idHouse AND expense_category_id = :expense_cat_ID";
+                $query2 = $conn -> prepare($update_expense_budget);
+                $query2->bindValue(":keret", $_POST["inputExpensePrice"]);
+                $query2->bindValue(":idHouse", $row["id_house_manage"]);
+                $query2->bindValue(":expense_cat_ID", $_POST["selectExpenseCategory"]);
+                $query2->execute();
             }
             
             $query->bindValue('details', $_POST["inputExpenseDetails"]);
@@ -52,7 +61,7 @@ else if(isset($_POST['insertWish'])){
     $select_user_and_pass = "SELECT * from person where email = :email1";
     
     $login_query = $conn -> prepare($select_user_and_pass);
-    $login_query -> bindValue(':email1',$_COOKIE["member_login"]);
+    $login_query -> bindValue(':email1',$_SESSION["member_login"]);
     $login_query -> execute();
 
     if($login_query -> rowCount() ==1){

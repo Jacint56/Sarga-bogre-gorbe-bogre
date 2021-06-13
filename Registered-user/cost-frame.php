@@ -7,7 +7,7 @@ if(isset($_POST['insertYear'])){
 else{
     $year = date("Y");
 }
-
+$housemanage = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -177,7 +177,7 @@ else{
 
                         require_once "../backend_php/db_config.php";
                             $select_user_and_pass = "SELECT * from person where email = :email1";
-    
+
                             $login_query = $conn -> prepare($select_user_and_pass);
                             $login_query -> bindValue(':email1',$_SESSION["member_login"]);
                             $login_query -> execute();
@@ -186,7 +186,7 @@ else{
                             if($login_query -> rowCount() ==1){
                                 if($row = $login_query->fetch()){ 
                                     $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
-                                    
+                                    $housemanage = $row["id_house_manage"];
                                     $login_query = $conn -> prepare($select_user_and_pass);
                                     $login_query -> execute();
                                 
@@ -297,7 +297,7 @@ else{
 
                         <div class="col-xl-12 col-lg-12">
                                     <!-- Insert form -->
-                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                            <form method="POST" action="#" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
                                     <select name="selectExpenseCategory" class="form-control" id="selectExpenseCategory">
@@ -327,11 +327,32 @@ else{
                                                 
                                                 <label for="inputExpenseBudget">Költésg keret megadása:</label>
                                                 <input type="text" class="form-control" name="inputExpenseBudget" id="inputExpenseBudget" placeholder="Költség keret megadása pl.: Étel - 30000">
-                                               
+                                                <br>
                                                 <button type="submit" name="insertExpenseBudget" class="btn btn-primary" id="insertExpenseBudget">Keret bevitele</button>
                                            
                                     </div>
                               </form>
+
+                              <?php
+                                if(isset($_POST["insertExpenseBudget"])) {
+                                    $category = $_POST["selectExpenseCategory"];
+                                    $budget = $_POST["inputExpenseBudget"];
+                                    $insert_into_expense_budget = "INSERT INTO expense_budget(keret,ID_house_manage, expense_category_id) VALUES(:keret,:house,:category_id)";
+                                    $query = $conn -> prepare($insert_into_expense_budget);
+                                    unset($_POST);
+                                    $query -> bindValue(':keret',$budget);
+                                    $query -> bindValue(':house',$housemanage);
+                                    $query -> bindValue(':category_id',$category);
+                                    
+
+                                    if(!($query->execute())){
+                                        echo "<script> alert('Nem sikerült hozzáadni a kívánt keretet, kérem próbálkozzon újra vagy forduljon a server felelőshöz!) </script>";
+
+                                    }
+                                }
+                                
+                              ?>
+                              
                             <!-- Bar Chart -->
                             <!--  Echo-zva lesz -->
                             <div class="card shadow mb-4">
@@ -341,40 +362,27 @@ else{
                                 <div class="card-body">
                                 <table class="table table-bordered">
                                 <tr>
-                                    <th>Aktuális hónap</th>
-                                    <th>Költség neve</th>
+                                    
+                                    <th>Költségkatergória</th>
+                                    <th>Keret</th>
                                 </tr>
                                     
                                 <?php
                             
                                     require_once "../backend_php/db_config.php";
-                                    $select_user_and_pass = "SELECT * from expense_category";
-                                    $login_query = $conn -> prepare($select_user_and_pass);
-                                    $login_query -> execute();
-                                    $data = $login_query->fetchAll();
+                                    $select_keret_es_koltseg = "SELECT keret, ID_house_manage, expense_category.expenses_category_name from expense_budget 
+                                    INNER JOIN expense_category ON expense_budget.expense_category_id = expense_category.ID where ID_house_manage = :id";
+                                    $keret_es_koltseg_query = $conn -> prepare($select_keret_es_koltseg);
+                                    $keret_es_koltseg_query -> bindValue(":id", $housemanage);
+                                    $keret_es_koltseg_query -> execute();
+                                    $data = $keret_es_koltseg_query->fetchAll();
                                     foreach($data as $row ){
-                                        //unset($id, $name);
-                                        $id = $row['ID'];
-                                        $expenseCategoryName = $row['expenses_category_name']; 
-
                                         echo "<tr>
-                                        <td>".$id ."</td>".
-                                        "<td>".$expenseCategoryName ."</td>".
-                                       "<td>
-                                        <form action='#' method='POST'>
-                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
-                                        
-                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
-                                        </form>
-                                        </td>";
+                                        <td>".$row["expenses_category_name"] ."</td>".
+                                        "<td>".$row["keret"] ."</td>";
                                     }
-
                                     echo "</tr>
-
                                     ";
-                                    
-                                    
-
                                 ?>
                                 </table>
                                 </div>
@@ -390,21 +398,7 @@ else{
                                 <div class="col-xl-12 col-lg-12">
 
                                     <!-- Bar Chart -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Listázni kívánt év kiválasztása</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <form action="charts.php" method="POST">
-                                                <div class="form-group">
-                                                <label for="inputYear">Év megadása:</label>
-                                                <input type="text" class="form-control" name="inputYear" id="inputYear" placeholder="Vigye be a kilistázni kívánt évet pl.: 2021">
-                                                </div>
-                                                <button type="submit" name="insertYear" class="btn btn-primary" id="insertYear">Adat lekérése</button>
-                                            </form>
-                                            
-                                        </div>
-                                    </div>
+                                    
 
                                 </div>
 

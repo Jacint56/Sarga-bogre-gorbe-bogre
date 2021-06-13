@@ -540,7 +540,7 @@ session_start();
                                             
                                             $expense_query = $conn -> prepare($insert_into_exp);
                                             $expense_query -> bindValue(':id_person',$person);
-                                           // $expense_query -> bindValue(':expenses_category',$row["wish_category"]);
+                                            
                                             $expense_query -> bindValue(':details',$row["wish_name"]);
                                             $expense_query -> bindValue(':price',$row["Price"]);
                                             $expense_query -> bindValue(':idHouse',$row["id_house_manage"]);
@@ -549,6 +549,12 @@ session_start();
                                                 $delete_from_wishes = "DELETE FROM wish WHERE ID=".$_POST['elfogad'];
                                                 $wish_query = $conn -> prepare($delete_from_wishes);
                                                 if($wish_query -> execute()){
+                                                    $update_expense_budget = "UPDATE expense_budget SET keret = keret - :keret WHERE ID_house_manage = :idHouse AND expense_category_id = :expense_cat_ID";
+                                                    $query = $conn -> prepare($update_expense_budget);
+                                                    $query->bindValue(":keret", $row["Price"]);
+                                                    $query->bindValue(":idHouse", $row["id_house_manage"]);
+                                                    $query->bindValue(":expense_cat_ID", $row["wish_category"]);
+                                                    $query->execute();
                                                     echo "<script>location.reload();</script>";
                                                 }
                                             }
