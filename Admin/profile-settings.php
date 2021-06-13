@@ -66,9 +66,8 @@ session_start();
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">További információ:</h6>
-                <a class="collapse-item" href="about-us.php">Rólunk</a>
-                <a class="collapse-item" href="buttons.php">Buttons</a>
-                <a class="collapse-item" href="cards.php">Cards</a>
+                <a class="collapse-item" href="../about-us.php">Rólunk</a>
+                
 
             </div>
         </div>
@@ -86,9 +85,9 @@ session_start();
             <div class="bg-white py-2 collapse-inner rounded">
                            
                     <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
-                       <!-- <a class="collapse-item" href="utilities-border.php">Borders</a>-->
+                       
                         <a class="collapse-item" href="cost-frame.php">Költség keret</a>
-                        <a href="main-panel.php"class="collapse-item">Személyek - módosítása</a>
+                        <a class="collapse-item" href="main-panel.php">Személyek - módosítása</a>
                         <a class="collapse-item " href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
         </div>
@@ -116,10 +115,7 @@ session_start();
                 <a class="collapse-item" href="../login.html">Belépés</a>
                 <a class="collapse-item" href="../register.html">Regisztráció</a>
                 <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Egyéb oldalak:</h6>
-                <a class="collapse-item active" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.php">Blank Page</a>
+                
             </div>
         </div>
     </li>
@@ -128,15 +124,11 @@ session_start();
     <li class="nav-item">
         <a class="nav-link" href="charts.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+            <span>Grafikon</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.php">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li>
+  
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
