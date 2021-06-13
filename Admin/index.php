@@ -9,7 +9,7 @@ $login_query -> execute();
     $row = $login_query->fetch();
         if($row['rank'] == 1 || $row['rank']==3 ){
             echo "<script>alert('Üdvözlet Admin!');</script>";
-            header("Location ../Admin/index.php");
+            header("Location index.php");
         }
         else
             header("Location ../404.html");

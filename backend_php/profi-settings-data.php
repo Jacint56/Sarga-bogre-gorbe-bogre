@@ -8,6 +8,7 @@ if(isset($_POST['changeFirstName'])){
     $query->bindValue(":name",$_POST["changeFirstName"]);
     $query->bindValue(":email",$_SESSION["member_login"]);
     $query -> execute();
+    header("Location ../Registered-user/profile.php");
 }
 if(isset($_POST['changeLastName'])){
     $update_name = "UPDATE person SET lname=:name where email=:email";
@@ -15,6 +16,7 @@ if(isset($_POST['changeLastName'])){
     $query->bindValue(":name",$_POST["changeLastName"]);
     $query->bindValue(":email",$_SESSION["member_login"]);
     $query -> execute();
+    header("Location ../Registered-user/profile.php");
 }
 if(isset($_POST['changePhone'])){
     $update_phone = "UPDATE person SET phone=:phone where email=:email";
@@ -22,6 +24,7 @@ if(isset($_POST['changePhone'])){
     $query->bindValue(":phone",$_POST["changePhone"]);
     $query->bindValue(":email",$_SESSION["member_login"]);
     $query -> execute();
+    header("Location ../Registered-user/profile.php");
 }
 if(isset($_POST['changeAddress'])){
     $update_address = "UPDATE person SET address=:address where email=:email";
@@ -29,17 +32,16 @@ if(isset($_POST['changeAddress'])){
     $query->bindValue(":address",$_POST["changeAddress"]);
     $query->bindValue(":email",$_SESSION["member_login"]);
     $query -> execute();
+    header("Location ../Registered-user/profile.php");
 }
 if(isset($_POST['changePass'])){
-    var_dump($_POST['changePass']);
-    var_dump($_POST["changePassConfirm"]);
-    exit();
     if($_POST['changePass']===$_POST["changePassConfirm"]){
         $update_address = "UPDATE person SET pass=:pass where email=:email";
         $query = $conn ->prepare($update_address);
         $query->bindValue(":pass",password_hash($_POST["changePass"], PASSWORD_DEFAULT));
         $query->bindValue(":email",$_SESSION["member_login"]);
         $query -> execute();
+        header("Location ../Registered-user/profile.php");
     }
 }
 if(isset($_POST['change_house_manage'])){
@@ -48,4 +50,5 @@ if(isset($_POST['change_house_manage'])){
     $query->bindValue(":name",$_POST['change_house_manage']);
     $query->bindValue(":email",$_SESSION["member_login"]);
     $query -> execute();
+    header("Location ../Registered-user/profile.php");
 }

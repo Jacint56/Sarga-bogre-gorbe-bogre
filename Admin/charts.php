@@ -7,7 +7,7 @@ if(isset($_POST['insertYear'])){
 else{
     $year = date("Y");
 }
-
+$housemanage = "";
 require_once "../backend_php/db_config.php";
 $select_user_and_pass = "SELECT * from person where email = :email1";
 $login_query = $conn -> prepare($select_user_and_pass);
@@ -15,6 +15,7 @@ $login_query -> bindValue(':email1',$_SESSION['member_login']);
 $login_query -> execute();
 if($login_query -> rowCount() ==1){
     if($row = $login_query->fetch()){
+        $housemanage = $row["id_house_manage"];
         if($row['rank'] == 1 || $row['rank']==3 ){
             //echo "<script>alert('Üdvözlet Admin!');</script>";
             //header("Location ../Admin/index.php");
@@ -595,9 +596,10 @@ $arr = array();
             $arr = [];
             for($i=1;$i<13;$i++){
                 $select_query = "SELECT sum(price) AS 'osszegahonapra'
-                FROM expenses WHERE MONTH(date) = " . $i . " and YEAR(date) = :ev1 ";
+                FROM expenses WHERE MONTH(date) = " . $i . " and YEAR(date) = :ev1 AND id_house_manage = :house";
                 $select_expenses_query = $conn -> prepare($select_query);
                 $select_expenses_query ->bindValue(':ev1',$year);
+                $select_expenses_query ->bindValue(':house', $housemanage);
                 $select_expenses_query -> execute();
                 $data = $select_expenses_query->fetchAll();
                 foreach($data as $row ){

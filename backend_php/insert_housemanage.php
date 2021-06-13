@@ -1,11 +1,5 @@
 <?php
 
-/*
-$_COOKIE["name"] . " " . $_COOKIE["lastname"];
-$_COOKIE["member_login"]
-$_COOKIE["member_password"]
-
-*/
 session_Start();
 
 
@@ -25,7 +19,7 @@ if(isset($_POST['insertHouseManage'])){
 
     if($login_query -> rowCount() ==1){
         if($row = $login_query->fetch()){
-            
+            if($row["id_house_manage"]== 0){
             $create_housemanage_query = "INSERT INTO house_manage(Name, Description, Date) VALUES
             ('" . $name . "','" . $desc . "', NOW())";
             var_dump($create_housemanage_query);
@@ -51,6 +45,10 @@ if(isset($_POST['insertHouseManage'])){
                 
                 
             }
+        }
+        else{
+            echo "Már van háztartásod, ha el akarsz szabadulni a háztartásodtól akkor szólj az adminnak, majd utána hozz létre egyet!";
+        }
             
         }
     }

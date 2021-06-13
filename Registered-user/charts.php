@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$housemanage = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +39,9 @@ function change(){
 </head>
 
 <body id="page-top">
+
+
+
 <?php
 
             ?>
@@ -292,6 +297,13 @@ function change(){
                                         $year = date("Y");
                                     }
                                 ?>
+                                <?php
+        $arr = array();
+        foreach($arr as $item): ?>
+            tomb.push(['<?php echo $item ?>']);
+            <?php endforeach; ?>
+
+            
                     
 
                     <div class="row">
@@ -342,6 +354,7 @@ function change(){
 
                             if($login_query -> rowCount() ==1){
                                 if($row = $login_query->fetch()){ 
+                                    $housemanage = $row["id_house_manage"];
                                     require_once "../backend_php/db_config.php";
                                     $select_user_and_pass = "SELECT expense_category.expenses_category_name, sum(expenses.Price) FROM expense_category 
                                     INNER JOIN expenses ON expense_category.ID = expenses.id_expenses_category
@@ -369,6 +382,10 @@ function change(){
                                     
 
                                 ?>
+
+
+
+            
                                 </table>
                                 </div>
                             </div>
@@ -561,9 +578,10 @@ function change(){
             $arr = [];
             for($i=1;$i<13;$i++){
                 $select_query = "SELECT sum(price) AS 'osszegahonapra'
-                FROM expenses WHERE MONTH(date) = " . $i . " and YEAR(date) = :ev1 ";
+                FROM expenses WHERE MONTH(date) = " . $i . " and YEAR(date) = :ev1 AND id_house_manage = :house";
                 $select_expenses_query = $conn -> prepare($select_query);
                 $select_expenses_query ->bindValue(':ev1',$year);
+                $select_expenses_query ->bindValue(':house', $housemanage);
                 $select_expenses_query -> execute();
                 $data = $select_expenses_query->fetchAll();
                 foreach($data as $row ){
@@ -571,7 +589,6 @@ function change(){
                 }
                 
             }
-            
             ?>
             
       

@@ -1,6 +1,6 @@
 <?php
 
-  $con = mysqli_connect("localhost", "root", "", "cost");
+  $con = mysqli_connect("localhost", "sbgb", "MI9wi3nxwd0qZXa", "sbgb");
   
   require 'PHPMailer/PHPMailerAutoload.php';
 
@@ -11,8 +11,8 @@
   $mail->SMTPSecure = "tls"; // sets the prefix to the servier
   $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
   $mail->Port = 587; // set the SMTP port for the GMAIL server
-  $mail->Username = "jacint9876543210@gmail.com"; // GMAIL username
-  $mail->Password = "####Bolond900####"; // GMAIL password
+  $mail->Username = "housekiper2021@gmail.com"; // GMAIL username
+  $mail->Password = "abafurupolf"; // GMAIL password
 
 
 

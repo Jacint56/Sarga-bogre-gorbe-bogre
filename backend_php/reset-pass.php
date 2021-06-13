@@ -76,7 +76,7 @@ if(isset($_POST['reset-password'])){
 
                 <input type="submit" name="reset-password" value="CONFIRM" class="mt-3 btn rounded-pill btn-lg btn-custom btn-block"/>
 
-                 <p class="mt-3 font-weight-normal"><a href="http://localhost:8080/sarga-bogre-gorbe-bogre/login.html"><strong>Sign in!</strong></a></p>
+                 <p class="mt-3 font-weight-normal"><a href="http://sbgb.proj.vts.su.ac.rs/login.html"><strong>Sign in!</strong></a></p>
              </form>
 
         </div>

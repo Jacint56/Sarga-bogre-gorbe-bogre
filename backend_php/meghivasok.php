@@ -6,7 +6,7 @@ session_start();
 <head>
 
     <script type="text/javascript">
-        //window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
+        window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
 	</script>
 
     <meta charset="utf-8">

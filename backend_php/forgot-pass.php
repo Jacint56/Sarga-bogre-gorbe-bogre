@@ -1,6 +1,6 @@
 <?php
 
-  $con = mysqli_connect("localhost", "root", "", "cost_");
+  $con = mysqli_connect("localhost", "sbgb", "MI9wi3nxwd0qZXa", "sbgb");
   
   require 'PHPMailer/PHPMailerAutoload.php';
 
@@ -11,8 +11,8 @@
   $mail->SMTPSecure = "tls"; // sets the prefix to the servier
   $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
   $mail->Port = 587; // set the SMTP port for the GMAIL server
-  $mail->Username = "jacint9876543210@gmail.com"; // GMAIL username
-  $mail->Password = "####Bolond900####"; // GMAIL password
+  $mail->Username = "housekiper2021@gmail.com"; // GMAIL username
+  $mail->Password = "abafurupolf"; // GMAIL password
 
 
 
@@ -30,7 +30,7 @@
     $query2 = mysqli_query($con, $token_query);
 
     $emailcount = mysqli_num_rows($query);
-    $link = "http://localhost:8080/sarga-bogre-gorbe-bogre/backend_php/reset-pass.php";
+    $link = "http://sbgb.proj.vts.su.ac.rs/backend_php/reset-pass.php";
 
     if($emailcount) {
 
@@ -52,7 +52,7 @@ Your verification code: ".$uniq_id;
   }
   }
 if($email_sent){
-    echo "Email sending was successful!";
+    echo "Az email sikeresen el lett küldve, nézze meg a SPAM mappát is!";
 }
 else{
     echo "Email sending was failed!";
