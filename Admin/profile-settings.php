@@ -84,11 +84,13 @@ session_start();
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                
-                <a class="collapse-item" href="../Registered-user/house-manage-insert.php">Háztartás</a>
-                
-                <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
-            </div>
+                           
+                    <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
+                       <!-- <a class="collapse-item" href="utilities-border.php">Borders</a>-->
+                        <a class="collapse-item" href="cost-frame.php">Költség keret</a>
+                        <a href="main-panel.php"class="collapse-item">Személyek - módosítása</a>
+                        <a class="collapse-item " href="utilities-expanses-insert.php">Költségek hozzáadása</a>
+                    </div>
         </div>
     </li>
 

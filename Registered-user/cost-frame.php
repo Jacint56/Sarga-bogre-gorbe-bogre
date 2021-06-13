@@ -3,11 +3,8 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-    <script type="text/javascript">
-        window.history.pushState('', 'Title', 'utilities-expanses-insert.php');
-	</script>
+<head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +12,7 @@ session_start();
     <meta name="description" content="Elektronikus költségvetés, by: Sárga bögre, görbe bögre csapat">
     <meta name="author" content="Juhász Jácint, Süge Ákos">
 
-    <title>Költség - kívánság megadása</title>
+    <title>Charts</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,39 +22,33 @@ session_start();
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom icon-->
-    <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+    <!-- Custom graph style -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+     <!-- Custom icon-->
+     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
 </head>
 
-<body id="page-top" onload="checkCookie()">
+<body id="page-top">
 <?php
-    if(isset($_GET["insert"])){
-        if($_GET["insert"]){
-            echo '<script type="text/javascript">
-            alert("Sikeres bevitel")
-                </script>';
-        } 
-        else{
-            echo '<script type="text/javascript">
-            alert("Sikertelen bevitel")
-                </script>';
-        }
-    }
-    else if(isset($_GET["tagmeghivva"])){
-        if($_GET["tagmeghivva"]){
-            echo '<script type="text/javascript">
-            alert("Meghivo sikeresen elkuldve!")
-                </script>';
-        } 
-        else{
-            echo '<script type="text/javascript">
-            alert("A meghivot nem sikerult elkuldeni!")
-                </script>';
-        }
-    }
-
-?>
+/*
+require_once "../backend_php/db_config.php";
+$arr = array();
+            for($i=1;$i<13;$i++){
+                $select_query = "SELECT sum(price) AS 'osszegahonapra'
+                FROM expenses WHERE MONTH(date) = " . $i;
+                $select_expenses_query = $conn -> prepare($select_query);
+                $select_expenses_query -> execute();
+                $data = $select_expenses_query->fetchAll();
+                foreach($data as $row ){
+                    array_push($arr,$row["osszegahonapra"]);
+                }
+                
+            }
+            var_dump(($arr));
+                exit();
+*/
+            ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -87,7 +78,7 @@ session_start();
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menü
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -107,13 +98,15 @@ session_start();
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Lehetőségek</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" href="#" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div id="collapseUtilities" class="collapse" href="#" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                            
@@ -122,6 +115,7 @@ session_start();
                         <a class="collapse-item" href="utilities-animation.php">Animations</a>
                         <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
+                </div>
                 </div>
             </li>
 
@@ -140,7 +134,7 @@ session_start();
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Oldalak</span>
                 </a>
-                <div id="collapsePages" class="collapse" href="#" aria-labelledby="headingPages"
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Bejelentkezés:</h6>
@@ -150,13 +144,13 @@ session_start();
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Egyéb oldalak:</h6>
                         <a class="collapse-item active" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.php">Blank Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="charts.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
@@ -187,14 +181,13 @@ session_start();
             <div id="content">
 
                 <!-- Topbar -->
+                
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
 
                     <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
@@ -225,19 +218,6 @@ session_start();
                             }
                         ?></span>
                     </div>
-
-                    <!--<form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>-->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">
@@ -271,6 +251,9 @@ session_start();
 
                         ?>
                   
+
+                        
+
                         <div class="topbar-divider d-none d-sm-block"></div>
                         
                         <!-- Nav Item - User Information -->
@@ -282,6 +265,7 @@ session_start();
                                     <?php
                                         //var_dump($_COOKIE);
                                         echo $_SESSION["name"] . " " . $_SESSION["lastname"];
+                                        //var_dump($_SESSION);
                                     ?>
 
                                 </span>
@@ -308,7 +292,7 @@ session_start();
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                            </div>
+                            </div> 
                         </li>
 
                     </ul>
@@ -320,17 +304,17 @@ session_start();
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Költségek és kívánságok hozzáadása</h1>
-                    <p class="mb-4">
-                        Itt adhatja meg a költségeket, és a kívánságokat a háztartáshoz.
-                    </p>
+                    <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+            
+                    
+                           
+                    <!-- Content Row -->
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <div class="col-lg-6" >
-
-                            <!-- Insert form -->
+                        <div class="col-xl-12 col-lg-12">
+                                    <!-- Insert form -->
                             <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
@@ -356,220 +340,97 @@ session_start();
                                         ?>
                                     </select>
                                     </div>
-                                    
-                                    <div class="form-group">
-                                    <label for="inputExpenseCategory">Ha nem találja a keresett kategóriát, vigyen be újat:</label>
-                                    <input type="text" class="form-control" id="inputExpenseCategory" name="inputExpenseCategory" placeholder="Költség kategória pl.: élelem">
-                                    
+                              </form>
+                            <!-- Bar Chart -->
+                            <!--  Echo-zva lesz -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $year. " költségei"; ?> </h6>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputExpenseDetails">Költség leírása:</label>
-                                    <input type="text" class="form-control" id="inputExpenseDetails" name="inputExpenseDetails" placeholder="Költség leírása pl.: banán">
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputExpensePrice">Költség ára:</label>
-                                    <input type="text" class="form-control" id="inputExpensePrice" name="inputExpensePrice" placeholder="Költség ára">
-                                </div>
-                                <button type="submit" name="insertExpense" id="insertExpense" class="btn btn-primary">Hozzáadás</button>
-                            </form>
-                        </div>
-                        <div class="col-lg-6" >
-                            <!-- Insert form -->
-                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertWishForm" name="insertWishForm">
-                            <div class="form-group">
-                                    <label for="selectWishCategory">Költség kategória megadása:</label>
-                                    <select name="selectWishCategory" id="selectWishCategory">
-
-                                        <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
-                                        <?php
-                                            require_once "../backend_php/db_config.php";
-                                            $select_user_and_pass = "SELECT * from expense_category";
-                                            $login_query = $conn -> prepare($select_user_and_pass);
-                                            $login_query -> execute();
-                                            $data = $login_query->fetchAll();
-                                            foreach($data as $row ){
-                                                unset($id, $name);
-                                                $id = $row['ID'];
-                                                $name = $row['expenses_category_name']; 
-                                                echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
-                                            }
-                                            
-
-                                        ?>
-                                    </select>
-                                    </div>     
-                            <div class="form-group">
-                                    <label for="inputWishCategory">Kívánság kategória megadása:</label>
-                                    <input type="text" class="form-control" id="inputWishCategory" name="inputWishCategory" placeholder="Kívánság kategória pl.: számítógép">
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputWishName">Kívánság:</label>
-                                    <input type="text" class="form-control" id="inputWishName" name="inputWishName" placeholder="Kívánság">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputWishPrice">Kívánság ára:</label>
-                                    <input type="text" class="form-control" id="inputWishPrice" name="inputWishPrice" placeholder="Kívánság ára">
-                                </div>
-                                
-                                <button type="submit" name="insertWish" id="insertWish" class="btn btn-primary">Hozzáadás</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top:10px;">
-                        <div class="col-lg-12">
-                        <form method="POST" id="inviteMemberToHouseManage" name="inviteMemberToHouseManage">         
-                            <button type="submit" name="inviteMemberToHouseManage" id="inviteMemberToHouseManage" class="btn btn-primary">Tagok meghívása</button>
-                        </form>
-                        </div>
-                    </div>
-                    <?php
-                        if(isset($_POST['inviteMemberToHouseManage'])){
-                            echo "
-                                <div class='row'>
-                                <div class='col-lg-12'>
-                                <br>
-                                <form method='POST' action='../backend_php/tagmeghivas.php'>
-                                
-                                <div class='form-group'>
-                                <label for='invitedPersonName'>Meghivni kivant szemely neve:</label>
-                                
-                                <input type='text' class='form-control' name='invitedPersonName' id='invitedPersonName' placeholder='Meghivni kivant szemely neve:'>
-                                </div>
-                                <button type='submit' name='submitInvite' id='submitInvite' class='btn btn-primary'>Meghivas</button>
-                                </form>
-                                </div>
-                                </div>
-                                ";
-                        }
-                    ?>
-                    <br><br>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <table class="table table-bordered">
+                                <div class="card-body">
+                                <table class="table table-bordered">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>SzemelyID</th>
-                                    <th>Kivansg neve</th>
-                                    <th>Kivansg kategoria</th>
-                                    <th>Kivansg ara</th>
+                                    <th>Aktuális hónap</th>
+                                    <th>Költség neve</th>
+                                </tr>
                                     
-
-                                    
-                                
-                                    <?php
-                                require_once "../backend_php/db_config.php";
-                                $leader = false;
-                                $select_user_and_pass = "SELECT * from person where email = :email1";
-                                
-                                $login_query = $conn -> prepare($select_user_and_pass);
-                                $login_query -> bindValue(':email1',$_SESSION["member_login"]);
-                                $login_query -> execute();
-                                $housemanageID = "";
-                                $person = "";
-                                if($login_query -> rowCount() ==1){
-                                    if($row = $login_query->fetch()){
-                                        if($row["rank"] == 2 or $row["rank"] == 3){
-                                            $leader = true;
-                                            $housemanageID =$row["id_house_manage"];
-                                            $person = $row["ID"];
-                                        }
-                                    }
-                                }
+                                <?php
+                            
                                     require_once "../backend_php/db_config.php";
-                                    $select_user_and_pass = "SELECT wish.ID, person.name, wish_name, expenses_category_name ,Price,date, wish.id_house_manage from wish
-   JOIN expense_category ON 
-   wish.wish_category = expense_category.ID
-   JOIN person ON
-   wish.id_person = person.ID
-    where wish.id_house_manage=".  $housemanageID ;
-                                    $asd = $conn -> prepare($select_user_and_pass);
-                                    $asd -> execute();
-                                    $data = $asd->fetchAll();
-                                    $wishName = "";
+                                    $select_user_and_pass = "SELECT * from expense_category";
+                                    $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> execute();
+                                    $data = $login_query->fetchAll();
                                     foreach($data as $row ){
                                         //unset($id, $name);
                                         $id = $row['ID'];
-                                        $idPerson = $row['name']; 
-                                        $wishName = $row['wish_name'];
-                                        $wishCategory = $row['expenses_category_name'];
-                                        $wishPrice = $row['Price'];
-                                        $date = $row['date'];
-                                        //echo '<option value="'.$id.'" name="'.$id.'" >'.$name.'</option>';
-                                        echo "<tr>
-                                        <td name=\"" . $id ." \">".$id ."</td>".
-                                        "<td>".$idPerson ."</td>".
-                                        "<td>".$wishName ."</td>".
-                                        "<td>".$wishCategory ."</td>".
-                                        "<td>".$wishPrice ."</td>".
-                                        "<td>".$date ."</td>";
+                                        $expenseCategoryName = $row['expenses_category_name']; 
 
-                                        if($leader){
-                                        echo '<td>
+                                        echo "<tr>
+                                        <td>".$id ."</td>".
+                                        "<td>".$expenseCategoryName ."</td>".
+                                       "<td>
+                                        <form action='#' method='POST'>
+                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
                                         
-                                        <form method="POST" action="#" id="insertWishForm" name="insertWishForm">         
-                                        <button type="submit" name="elfogad" id="inviteMemberToHouseManage" class="btn btn-primary" value="'. $id .'">Elfogad</button>
-                                          
-                                        <button type="submit" name="elvet" id="inviteMemberToHouseManage" class="btn btn-primary" value="'. $id .'">Elvet</button>
+                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
                                         </form>
-                                        
-                                        </td>';
+                                        </td>";
                                     }
 
                                     echo "</tr>
 
                                     ";
-                                    }
                                     
                                     
 
                                 ?>
                                 </table>
-                                
-                                <?php
-                                    if(isset($_POST['elfogad'])){
+                                </div>
+                            </div>
 
-                                        $select_from_wishes = "SELECT * FROM wish where ID = ". $_POST['elfogad'];
-                                        $wish_query = $conn -> prepare($select_from_wishes);
-                                        $wish_query -> execute();
-                                        if($row = $wish_query->fetch()){
-                                            $insert_into_exp = "INSERT INTO expenses(id_person,id_expenses_category, details, date, Price, id_house_manage)
-                                            VALUES (:id_person," . $row["wish_category"] .",:details, NOW(), :price, :idHouse)";
-                                            
-                                            $expense_query = $conn -> prepare($insert_into_exp);
-                                            $expense_query -> bindValue(':id_person',$person);
-                                           // $expense_query -> bindValue(':expenses_category',$row["wish_category"]);
-                                            $expense_query -> bindValue(':details',$row["wish_name"]);
-                                            $expense_query -> bindValue(':price',$row["Price"]);
-                                            $expense_query -> bindValue(':idHouse',$row["id_house_manage"]);
-                                            
-                                            if($expense_query -> execute()){
-                                                $delete_from_wishes = "DELETE FROM wish WHERE ID=".$_POST['elfogad'];
-                                                $wish_query = $conn -> prepare($delete_from_wishes);
-                                                if($wish_query -> execute()){
-                                                    echo "<script>location.reload();</script>";
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                    if(isset($_POST['elvet'])){
-                                        $delete_from_wishes = "DELETE FROM wish WHERE ID=".$_POST['elvet'];
-                                        $wish_query = $conn -> prepare($delete_from_wishes);
-                                        if($wish_query -> execute()){
-                                            echo "<script>location.reload();</script>";
-                                        }
-                                    }
-                                
-                                ?>
                         </div>
-                    </div>
 
+                        
+                    </div>
+                     <!--  Echo-zva lesz -->
+                     <div class="row">
+
+                                <div class="col-xl-12 col-lg-12">
+
+                                    <!-- Bar Chart -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Listázni kívánt év kiválasztása</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="charts.php" method="POST">
+                                                <div class="form-group">
+                                                <label for="inputYear">Év megadása:</label>
+                                                <input type="text" class="form-control" name="inputYear" id="inputYear" placeholder="Vigye be a kilistázni kívánt évet pl.: 2021">
+                                                </div>
+                                                <button type="submit" name="insertYear" class="btn btn-primary" id="insertYear">Adat lekérése</button>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <?php   
+                                    if(isset($_POST['insertYear'])){
+                                        $year = $_POST['inputYear'];
+                                    }
+                                    else{
+                                        $year = date("Y");
+                                    }
+                                ?>
+                    
 
 
                 </div>
-                
                 <!-- /.container-fluid -->
 
             </div>
@@ -616,6 +477,7 @@ session_start();
         </div>
     </div>
 
+
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -626,6 +488,129 @@ session_start();
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <!-- Custom scripts-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+
+
+    <!-- ChartScript -->
+    <script type="text/javascript">
+        var ctx = document.getElementById('myBarChart');
+        var tomb = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep','Okt','Nov','Dec'];
+        <?php
+        $arr = array();
+        foreach($arr as $item): ?>
+            tomb.push(['<?php echo $item ?>']);
+            <?php endforeach; ?>
+
+            <?php
+
+            require_once "../backend_php/db_config.php";
+            $arr = [];
+            for($i=1;$i<13;$i++){
+                $select_query = "SELECT sum(price) AS 'osszegahonapra'
+                FROM expenses WHERE MONTH(date) = " . $i . " and YEAR(date) = :ev1 ";
+                $select_expenses_query = $conn -> prepare($select_query);
+                $select_expenses_query ->bindValue(':ev1',$year);
+                $select_expenses_query -> execute();
+                $data = $select_expenses_query->fetchAll();
+                foreach($data as $row ){
+                    array_push($arr,$row["osszegahonapra"]);
+                }
+                
+            }
+            
+            ?>
+            
+      
+        
+        
+           
+
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: tomb,
+        
+        datasets: [{
+            label: 'Költség',
+            
+                    
+            data: [<?php 
+            foreach($arr as $item){
+                echo $item . ",";
+            }
+             ?>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        scales: {
+          x: [{
+            
+            gridLines: {
+              display: true,
+              drawBorder: true
+            },
+            ticks: {
+              maxTicksLimit: 6
+            },
+            maxBarThickness: 25,
+          }],
+          y: [{
+            ticks: {
+              min: 0,
+              max: 15000,
+              maxTicksLimit: 5,
+              padding: 10,
+              
+              
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: true,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        }
+    }
+});
+    </script>
+    
+    
 </body>
 
 </html>
