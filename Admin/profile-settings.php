@@ -274,7 +274,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                        
                                         <div class="col-auto">
-                                        <form method="POST" action="profi-settings-data.php">
+                                        <form method="POST" action="../backend_php/profi-settings-data.php">
                                                     <div class="form-group">
                                                         <label for="changeFirstName">Keresztnév szerkesztése:</label>
                                                         <input type="text" class="form-control" id="changeFirstName" name="changeFirstName">
@@ -295,7 +295,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                         
                                         <div class="col-auto">
-                                        <form method="POST" action="profi-settings-data.php">
+                                        <form method="POST" action="../backend_php/profi-settings-data.php">
                                                     <div class="form-group">
                                                         <label for="changeLastName">Vezetéknév szerkesztése:</label>
                                                         <input type="text" class="form-control" id="changeLastName" name="changeLastName">
@@ -315,7 +315,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                         
                                         <div class="col-auto">
-                                        <form method="POST" action="profi-settings-data.php">
+                                        <form method="POST" action="../backend_php/profi-settings-data.php">
                                                     <div class="form-group">
                                                         <label for="changePhone">Telefonszám szerkesztése:</label>
                                                         <input type="text" class="form-control" id="changePhone" name="changePhone">
@@ -338,7 +338,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                         
                                         <div class="col-auto">
-                                        <form method="POST" action="profi-settings-data.php">
+                                        <form method="POST" action="../backend_php/profi-settings-data.php">
                                                     <div class="form-group">
                                                         <label for="changeAddress">Cím szerkesztése:</label>
                                                         <input type="text" class="form-control" id="changeAddress" name="changeAddress">
@@ -359,7 +359,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                         
                                         <div class="col-auto">
-                                        <form method="POST" action="profi-settings-data.php">
+                                        <form method="POST" action="../backend_php/profi-settings-data.php">
                                                     <div class="form-group">
                                                         <label for="changePass">Jelszó szerkesztése:</label>
                                                         <input type="text" class="form-control" id="changePass" name="changePass">
