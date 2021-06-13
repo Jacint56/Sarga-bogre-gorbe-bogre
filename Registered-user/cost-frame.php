@@ -38,25 +38,7 @@ else{
 </head>
 
 <body id="page-top">
-<?php
-/*
-require_once "../backend_php/db_config.php";
-$arr = array();
-            for($i=1;$i<13;$i++){
-                $select_query = "SELECT sum(price) AS 'osszegahonapra'
-                FROM expenses WHERE MONTH(date) = " . $i;
-                $select_expenses_query = $conn -> prepare($select_query);
-                $select_expenses_query -> execute();
-                $data = $select_expenses_query->fetchAll();
-                foreach($data as $row ){
-                    array_push($arr,$row["osszegahonapra"]);
-                }
-                
-            }
-            var_dump(($arr));
-                exit();
-*/
-            ?>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -149,10 +131,7 @@ $arr = array();
                         <a class="collapse-item" href="../login.html">Belépés</a>
                         <a class="collapse-item" href="../register.html">Regisztráció</a>
                         <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Egyéb oldalak:</h6>
-                        <a class="collapse-item active" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        
                     </div>
                 </div>
             </li>
@@ -161,15 +140,10 @@ $arr = array();
             <li class="nav-item active">
                 <a class="nav-link" href="charts.php">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Grafikon</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -312,7 +286,7 @@ $arr = array();
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Költség kategória</h1>
             
                     
                            
@@ -326,7 +300,7 @@ $arr = array();
                             <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
-                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
+                                    <select name="selectExpenseCategory" class="form-control" id="selectExpenseCategory">
 
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
@@ -347,6 +321,15 @@ $arr = array();
 
                                         ?>
                                     </select>
+                                    </div>
+                                    <div class="form-group">
+                                    
+                                                
+                                                <label for="inputExpenseBudget">Költésg keret megadása:</label>
+                                                <input type="text" class="form-control" name="inputExpenseBudget" id="inputExpenseBudget" placeholder="Költség keret megadása pl.: Étel - 30000">
+                                               
+                                                <button type="submit" name="insertExpenseBudget" class="btn btn-primary" id="insertExpenseBudget">Keret bevitele</button>
+                                           
                                     </div>
                               </form>
                             <!-- Bar Chart -->
