@@ -451,10 +451,11 @@ session_start();
                                 <tr>
                                     <th>ID</th>
                                     <th>SzemelyID</th>
-                                    <th>Kivansg neve</th>
-                                    <th>Kivansg kategoria</th>
-                                    <th>Kivansg ara</th>
-                                    
+                                    <th>Kivanság neve</th>
+                                    <th>Kivanság kategoria</th>
+                                    <th>Kivanság ara</th>
+                                    <th>Igénylés időpontja</th></th>
+                                    <th>Művelet</th></th>
 
                                     
                                 

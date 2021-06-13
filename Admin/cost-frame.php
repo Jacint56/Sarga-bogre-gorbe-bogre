@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(isset($_POST['insertYear'])){
+    $year = $_POST['inputYear'];
+}
+else{
+    $year = date("Y");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,25 +36,7 @@ session_start();
 </head>
 
 <body id="page-top">
-<?php
-/*
-require_once "../backend_php/db_config.php";
-$arr = array();
-            for($i=1;$i<13;$i++){
-                $select_query = "SELECT sum(price) AS 'osszegahonapra'
-                FROM expenses WHERE MONTH(date) = " . $i;
-                $select_expenses_query = $conn -> prepare($select_query);
-                $select_expenses_query -> execute();
-                $data = $select_expenses_query->fetchAll();
-                foreach($data as $row ){
-                    array_push($arr,$row["osszegahonapra"]);
-                }
-                
-            }
-            var_dump(($arr));
-                exit();
-*/
-            ?>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -420,14 +408,6 @@ $arr = array();
 
 
                             </div>
-                            <?php   
-                                    if(isset($_POST['insertYear'])){
-                                        $year = $_POST['inputYear'];
-                                    }
-                                    else{
-                                        $year = date("Y");
-                                    }
-                                ?>
                     
 
 

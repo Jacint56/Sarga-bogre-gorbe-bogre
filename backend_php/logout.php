@@ -1,14 +1,5 @@
 <?php
-/*
-    setcookie("member_login", null,time()- (86400), "/");
-    //unset($_COOKIE["member_login"]);
-    setcookie("member_password", null,time() - (86400), "/");
-    //unset($_COOKIE["member_password"]);
-    setcookie("name", null,time() - (86400), "/");
-    //unset($_COOKIE["name"]);
-    setcookie("lastname", null,time() - (86400), "/");
-    //unset($_COOKIE["lastname"]);
-    */
+
 
     session_start();
     $_SESSION = [];

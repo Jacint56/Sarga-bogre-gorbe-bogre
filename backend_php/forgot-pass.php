@@ -1,6 +1,6 @@
 <?php
 
-  $con = mysqli_connect("localhost", "root", "", "cost");
+  $con = mysqli_connect("localhost", "root", "", "cost_");
   
   require 'PHPMailer/PHPMailerAutoload.php';
 

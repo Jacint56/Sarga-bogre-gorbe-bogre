@@ -5,6 +5,13 @@ session_start();
 <html lang="en">
 
 <head>
+<script>
+function change(){
+    document.getElementById("insertExpenseForm").submit();
+}
+
+</script>
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,23 +38,7 @@ session_start();
 
 <body id="page-top">
 <?php
-/*
-require_once "../backend_php/db_config.php";
-$arr = array();
-            for($i=1;$i<13;$i++){
-                $select_query = "SELECT sum(price) AS 'osszegahonapra'
-                FROM expenses WHERE MONTH(date) = " . $i;
-                $select_expenses_query = $conn -> prepare($select_query);
-                $select_expenses_query -> execute();
-                $data = $select_expenses_query->fetchAll();
-                foreach($data as $row ){
-                    array_push($arr,$row["osszegahonapra"]);
-                }
-                
-            }
-            var_dump(($arr));
-                exit();
-*/
+
             ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -106,16 +97,13 @@ $arr = array();
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
-                    <div id="collapseUtilities" class="collapse" href="#" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                            
                     <a class="collapse-item" href="house-manage-insert.php">Háztartás</a>
-                        <a class="collapse-item" href="cost-frame.php">Költség keret</a>
+                        <a class="collapse-item" href="utilities-border.php">Borders</a>
                         <a class="collapse-item" href="utilities-animation.php">Animations</a>
                         <a class="collapse-item active" href="utilities-expanses-insert.php">Költségek hozzáadása</a>
                     </div>
-                </div>
                 </div>
             </li>
 
@@ -189,35 +177,7 @@ $arr = array();
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <span style="font-size: 24px; color:black; font-weight: bold; background-color:#71B48D;">
-                            <?php 
-
-                        require_once "../backend_php/db_config.php";
-                            $select_user_and_pass = "SELECT * from person where email = :email1";
-    
-                            $login_query = $conn -> prepare($select_user_and_pass);
-                            $login_query -> bindValue(':email1',$_SESSION["member_login"]);
-                            $login_query -> execute();
-
-
-                            if($login_query -> rowCount() ==1){
-                                if($row = $login_query->fetch()){ 
-                                    $select_user_and_pass = "SELECT Name from house_manage where ID = ". $row["id_house_manage"];
-                                    
-                                    $login_query = $conn -> prepare($select_user_and_pass);
-                                    $login_query -> execute();
-                                
-                                
-                                    if($login_query -> rowCount() ==1){
-                                        if($row = $login_query->fetch()){
-                                            echo  $row["Name"];
-                                        }
-                                    }
-                                }
-                            }
-                        ?></span>
-                    </div>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" style="margin-top:30px;">
@@ -372,43 +332,48 @@ $arr = array();
                             <!-- Bar Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $year. " költségei"; ?> </h6>
+                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo "A háztartás top 3 legmagasabb költségvetésű kategóriái:"; ?> </h6>
                                 </div>
                                 <div class="card-body">
                                 <table class="table table-bordered">
                                 <tr>
-                                    <th>Aktuális hónap</th>
-                                    <th>Költség neve</th>
+                                    <th>Kategória</th>
+                                    <th>Összköltség az adott kategóriára</th>
                                 </tr>
                                     
                                 <?php
+                            $select_user_and_pass = "SELECT * from person where email = :email1";
                             
+                            $login_query = $conn -> prepare($select_user_and_pass);
+                            $login_query -> bindValue(':email1',$_SESSION["member_login"]);
+                            $login_query -> execute();
+
+                            if($login_query -> rowCount() ==1){
+                                if($row = $login_query->fetch()){ 
                                     require_once "../backend_php/db_config.php";
-                                    $select_user_and_pass = "SELECT * from expense_category";
+                                    $select_user_and_pass = "SELECT expense_category.expenses_category_name, sum(expenses.Price) FROM expense_category 
+                                    INNER JOIN expenses ON expense_category.ID = expenses.id_expenses_category
+                                     WHERE YEAR(expenses.date) = YEAR(NOW()) AND id_house_manage = :house GROUP BY expense_category.expenses_category_name ORDER BY sum(expenses.Price) DESC LIMIT 3";
                                     $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> bindValue(":house", $row["id_house_manage"]);
                                     $login_query -> execute();
+                                    
                                     $data = $login_query->fetchAll();
                                     foreach($data as $row ){
                                         //unset($id, $name);
-                                        $id = $row['ID'];
-                                        $expenseCategoryName = $row['expenses_category_name']; 
+                                        $id = $row['expenses_category_name'];
+                                        $expenseCategoryName = $row['sum(expenses.Price)']; 
 
                                         echo "<tr>
                                         <td>".$id ."</td>".
-                                        "<td>".$expenseCategoryName ."</td>".
-                                       "<td>
-                                        <form action='#' method='POST'>
-                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
-                                        
-                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
-                                        </form>
-                                        </td>";
+                                        "<td>".$expenseCategoryName ."</td>" ;
                                     }
 
                                     echo "</tr>
 
                                     ";
-                                    
+                                }
+                            }
                                     
 
                                 ?>
@@ -426,10 +391,10 @@ $arr = array();
 
                         <div class="col-xl-12 col-lg-12">
                                     <!-- Insert form -->
-                            <form method="POST" action="../backend_php/insert_expenses.php" id="insertExpenseForm" name="insertExpenseForm">
+                            <form method="POST" action="#" id="insertExpenseForm" name="insertExpenseForm">
                                  <div class="form-group">
                                     <label for="selectExpenseCategory">Költség kategória megadása:</label>
-                                    <select name="selectExpenseCategory" id="selectExpenseCategory">
+                                    <select onchange="change();" name="selectExpenseCategory" id="selectExpenseCategory">
 
                                         <option value="0" disabled selected name="0" > -- Válasszon kategóriát -- </option>
                                         <?php
@@ -454,51 +419,66 @@ $arr = array();
                               </form>
                             <!-- Bar Chart -->
                             <!--  Echo-zva lesz -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><?php echo $year. " költségei"; ?> </h6>
-                                </div>
-                                <div class="card-body">
-                                <table class="table table-bordered">
-                                <tr>
-                                    <th>Aktuális hónap</th>
-                                    <th>Költség neve</th>
-                                </tr>
+                            
+                                
                                     
                                 <?php
-                            
+
+                                if(isset($_POST['selectExpenseCategory'])){
                                     require_once "../backend_php/db_config.php";
-                                    $select_user_and_pass = "SELECT * from expense_category";
+                                    $select_user_and_pass = "SELECT * from person where email = :email1";
+                                    
                                     $login_query = $conn -> prepare($select_user_and_pass);
+                                    $login_query -> bindValue(':email1',$_SESSION["member_login"]);
                                     $login_query -> execute();
-                                    $data = $login_query->fetchAll();
-                                    foreach($data as $row ){
-                                        //unset($id, $name);
-                                        $id = $row['ID'];
-                                        $expenseCategoryName = $row['expenses_category_name']; 
+                                    echo '<div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary"> '; 
+                                    echo $year. " költségei";
+                                    echo ' </h6>
+                                            </div>
+                                            <div class="card-body">
+                                            <table class="table table-bordered">
+                                            <tr>
+                                                <th>Ki adta hozzá</th>
+                                                <th>KATEGORIA</th>
+                                                <th>LEIRAS</th>
+                                                <th>PRICE</th>
+                                            </tr>';
+                                    if($login_query -> rowCount() ==1){
+                                        if($row = $login_query->fetch()){ 
+                                            $select_expenses_AND_infos = "SELECT person.name,person.lname, expense_category.expenses_category_name ,expenses.details , expenses.Price FROM expenses 
+                                                                        INNER JOIN expense_category ON expenses.id_expenses_category = expense_category.ID 
+                                                                        INNER JOIN person ON expenses.id_person = person.ID
+                                                                        WHERE expenses.id_expenses_category = :id_category AND expenses.id_house_manage = :id_house ORDER BY Price DESC";
+                                           $expenses_AND_infos = $conn -> prepare($select_expenses_AND_infos);
+                                           $expenses_AND_infos -> bindValue(":id_house", $row["id_house_manage"]);
+                                           $expenses_AND_infos -> bindValue(":id_category", $_POST['selectExpenseCategory']);
+                                           $expenses_AND_infos -> execute();
+                                           $expenses_AND_infos_data = $expenses_AND_infos->fetchAll();
 
-                                        echo "<tr>
-                                        <td>".$id ."</td>".
-                                        "<td>".$expenseCategoryName ."</td>".
-                                       "<td>
-                                        <form action='#' method='POST'>
-                                        <button class='btn btn-primary' name='confirmExpense' type='button' >Elfogad</button>
+                                           foreach($expenses_AND_infos_data as $row ){
+    
+                                            echo "<tr>
+                                            <td>".$row['name'] ." " . $row['lname'] ."</td>".
+                                            "<td>".$row['expenses_category_name'] ."</td>".
+                                            "<td>".$row['details'] ."</td>".
+                                            "<td>".$row['Price'] ."</td>";
+                                            echo "</tr>";
+                                        }
                                         
-                                        <button class='btn btn-primary' name='cancelExpense' type='button' >Elvet</button>
-                                        </form>
-                                        </td>";
+                                        
+                                        }
                                     }
-
-                                    echo "</tr>
-
-                                    ";
+                                    echo '</table></div>
+                                    </div>';
+                                }
                                     
                                     
 
                                 ?>
-                                </table>
-                                </div>
-                            </div>
+                                
+                                
 
                         </div>
 

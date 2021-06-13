@@ -1,5 +1,13 @@
 <?php
 session_start();
+   
+if(isset($_POST['insertYear'])){
+    $year = $_POST['inputYear'];
+}
+else{
+    $year = date("Y");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -419,14 +427,7 @@ $arr = array();
 
 
                             </div>
-                            <?php   
-                                    if(isset($_POST['insertYear'])){
-                                        $year = $_POST['inputYear'];
-                                    }
-                                    else{
-                                        $year = date("Y");
-                                    }
-                                ?>
+                            
                     
 
 
