@@ -7,12 +7,7 @@ $login_query -> bindValue(':email1',$_SESSION['member_login']);
 $login_query -> execute();
 
     $row = $login_query->fetch();
-        if($row['rank'] == 1 || $row['rank']==3 ){
-            echo "<script>alert('Üdvözlet Admin!');</script>";
-            header("Location index.php");
-        }
-        else
-            header("Location ../404.html");
+
     
 
 ?>
@@ -39,6 +34,59 @@ $login_query -> execute();
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
      <!-- Custom icon-->
      <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+
+<script type="text/javascript">
+function AjaxFunction()
+{
+var httpxml;
+try
+  {
+  // Firefox, Opera 8.0+, Safari
+  httpxml=new XMLHttpRequest();
+  }
+catch (e)
+  {
+  // Internet Explorer
+		  try
+   			 		{
+   				 httpxml=new ActiveXObject("Msxml2.XMLHTTP");
+    				}
+  			catch (e)
+    				{
+    			try
+      		{
+      		httpxml=new ActiveXObject("Microsoft.XMLHTTP");
+     		 }
+    			catch (e)
+      		{
+      		alert("Your browser does not support AJAX!");
+      		return false;
+      		}
+    		}
+  }
+	function stateck() 
+    {
+    	if(httpxml.readyState==4)
+      {
+		document.getElementById("msg").innerHTML=httpxml.responseText;
+		document.getElementById("msg").style.background='#f1f1f1';
+      }
+    }
+		var url="../backend_php/ajax-data.php";
+		url=url+"?sid="+Math.random();
+		httpxml.onreadystatechange=stateck;
+		httpxml.open("GET",url,true);
+		httpxml.send(null);
+		tt=timer_function();
+  }
+
+///////////////////////////
+function timer_function(){
+	var refresh=1000; // Refresh rate in milli seconds
+	mytime=setTimeout('AjaxFunction();',refresh)
+}
+
+</script>
 
 </head>
 
@@ -86,7 +134,7 @@ $login_query -> execute();
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tudjon meg többet:</h6>
-                        <a class="collapse-item" href="../about-us.php">Rólunk</a>
+                        <a class="collapse-item" href="about-us.php">Rólunk</a>
                         
                     </div>
                 </div>
@@ -121,23 +169,24 @@ $login_query -> execute();
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Oldalak</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Bejelentkezés:</h6>
-                        <a class="collapse-item" href="../login.html">Belépés</a>
-                        <a class="collapse-item" href="../register.html">Regisztráció</a>
-                        <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
-                      
-                    </div>
-                </div>
-            </li>
+           <!-- Nav Item - Pages Collapse Menu -->
+    <!--<li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Oldalak</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Bejelentkezés:</h6>
+                <a class="collapse-item" href="../login.html">Belépés</a>
+                <a class="collapse-item" href="../register.html">Regisztráció</a>
+                <a class="collapse-item" href="../forgot-password.html">Elfelejtett jelszó</a>
+                
+            </div>
+        </div>
+    </li>-->
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -291,7 +340,24 @@ $login_query -> execute();
                     <!-- Content Row -->
                     <div class="row">
 
-                        
+                    	<div class=" col-lg-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col ">
+                                            
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                          		<div id="msg"></div>
+													<br>
+												<input type=button value='Get Server Time' onclick="timer_function();">
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    
                     </div>
 
                     <!-- Content Row -->
